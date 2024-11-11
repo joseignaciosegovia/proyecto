@@ -1,0 +1,17 @@
+h1 {
+    font-family: Georgia;
+}
+
+.btn-group {
+    justify-content: center;
+    width: 30%;
+}
+
+/* Eliminar bordes dobles */
+.btn-group button:not(:last-child) {
+    border-right: none; 
+}
+
+.btn-group button {
+    width: 25%;
+}
