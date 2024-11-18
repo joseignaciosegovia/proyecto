@@ -26,5 +26,17 @@
 <?php
     require_once __DIR__ . "/../clases/Crud.php";
     $crud = new Crud();
-    $datos = $crud->listarDatos();
+    $datos = $crud->listarDatos("clientes");
+
+    foreach($datos as $item) {
+        echo $item->ciudad . " ";
+    }
+
+    echo "</br>";
+
+    $datos = $crud->listarDatos("personas");
+
+    foreach($datos as $item) {
+        echo $item->usuario . " ";
+    }
 ?>

@@ -1,10 +1,30 @@
+#cabecera {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+i {
+    font-size: x-large;
+}
+
 h1 {
-    font-family: Georgia;
+    font-family: Georgia; /* CAMBIAR FUENTE */
+    margin-left: auto;
+}
+
+#iconosCabecera {
+    margin-left: auto;
+}
+
+#iconosCabecera a {
+    padding-right: 15px; /* MUEVE EL TÍTULO HACIA LA IZQUIERDA */
 }
 
 .btn-group {
+    display: flex;
     justify-content: center;
-    width: 30%;
+    width: 100%;
 }
 
 /* Eliminar bordes dobles */
@@ -12,6 +32,156 @@ h1 {
     border-right: none; 
 }
 
-.btn-group button {
-    width: 25%;
+.btn-group button:hover {
+    /*background-color: #ccd1d1;*/
+    color: #839192;
+    text-decoration: underline;
+}
+
+#cesta, #usuario {
+    position: fixed;
+    top: 0;
+    right: 0;
+    /*right: -100%;*/
+    width: 360px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    background-color: #fcf3cf;
+    box-shadow: -2px solid 4px hsl(0 4% 15% / 10%);
+    border: 1px solid red;
+    transition: 1.7s;
+}
+
+.cart.active{
+    right: 0;
+    transition: .5s;
+}
+
+.cart-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.cart-box{
+    display:grid;
+    grid-template-columns: 32% 50% 18%;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.cart-img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    padding: 10px;
+}
+
+.detail.box{
+    display: grid;
+    row-gap: .5rem;
+}
+
+.cart-product-title{
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.cart-price{
+    font-weight: 500;
+}
+
+.cart-quantity{
+    border: 1px solid #fdfffc;
+    outline-color: red;
+    width: 1.4rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.cart-remove{
+    font-size: 24px;
+    color: red;
+    cursor: pointer;
+}
+
+.total{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    border-top: 1px solid #fdfffc;
+}
+
+.total-title{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.total-price{
+    margin-left: .5rem;
+}
+
+/* Diseño de los botones: 'Añadir productos', 'Acceso a trabajadores', 'Crear usuario' y 'Registrarse' */
+.btn-buy, .btn-trabajadores, .btn-usu, .btn-login{
+    display: flex;
+    margin: 1.5rem auto 0 auto;
+    padding: 12px 20px;
+    border: none;
+    background-color: #4946fd;
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .4s;
+}
+
+/* Ponemos el ratón encima de los botones: 'Comprar', 'Acceso a trabajadores', 'Crear usuario' y 'Registrarse' */
+.btn-buy:hover, .btn-trabajadores:hover, .btn-usu:hover, .btn-login:hover{
+    background-color: red;
+    color: #fdfffc;
+}
+
+/* Botón cerrar carrito */
+.bi-x-circle {
+    position: absolute;
+    top: 1rem;
+    right: .8rem;
+    font-size: 2rem;
+    color: black;
+    cursor: pointer;
+}
+
+
+#seccionEntrega {
+    background-color: bisque;
+    border: 1px solid bisque;
+    display: flex;
+    justify-content: center;
+}
+
+#seccionEntrega div {
+    
+}
+
+#contacto {
+    background-color: lightgrey;
+}
+
+#copyright {
+    color: white;
+    background-color: black;
+}
+
+#iconosContacto {
+    display: flex;
+    justify-content: center;
+}
+
+#copyright a {
+    display: flex;
+    justify-content: end;
 }

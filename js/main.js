@@ -11,8 +11,8 @@ const buy_btn = document.querySelector(".btn-buy");
 buy_btn.addEventListener("click", handle_buyOrden);
 
 // Botón para el acceso de los trabajadores
-const btAcceso = document.querySelector(".btn-acceso");
-btAcceso.addEventListener("click", handle_acceso);
+const btnTrabajadores = document.querySelector(".btn-trabajadores");
+btnTrabajadores.addEventListener("click", handle_trabajadores);
 
 let itemsAdded = [];
 
@@ -150,7 +150,7 @@ function handle_buyOrden() {
 }
 
 // Pulsamos el botón 'Acceso a trabajadores'
-function handle_acceso() {
+function handle_trabajadores() {
     // Abrimos una pestaña con el acceso a los trabajadores
     window.open("servidor/servidor.php", "Intranet");
 }
