@@ -1,0 +1,68 @@
+use tienda;
+
+db.createUser(
+  {
+    user :  "mongoadmin",
+    pwd :  "123456",
+    roles :  [
+        {  role :  "readWrite",  db :  "tienda"  }
+    ]
+  }
+);
+
+db.trabajador.insert(
+  {
+    "nombre" : "Antonio López",
+    "departamento" : "Compras",
+    "fecha_contratacion" : "01-04-2021"
+  },
+  {
+    "nombre" : "Juan Garcia",
+    "departamento" : "Análisis",
+    "fecha_contratacion" : "03-10-2023"
+  },
+  {
+    "nombre" : "María Fernández",
+    "departamento" : "Gestión",
+    "fecha_contratacion" : "13-05-2022"
+  },
+  {
+    "nombre" : "Lucía Hernández",
+    "departamento" : "Servicio Técnico",
+    "fecha_contratacion" : "11-01-2021"
+  }
+);
+
+db.contraseñasTr.insert(
+  {
+    "trabajador_id": {
+      "$oid": "673c963ddc4801c43d00001d"
+    },
+    "usuario" : "antLop",
+    "contraseña": "zxcljk6"
+  },
+  {
+    "trabajador_id": {
+      "$oid": "673c963ddc4801c43d00001e"
+    },
+    "usuario" : "juaGar",
+    "contraseña": "qewjrlkvj"
+  },
+  {
+    "trabajador_id": {
+      "$oid": "673c963ddc4801c43d00001f"
+    },
+    "usuario" : "marFer",
+    "contraseña": "q345jknv"
+  },
+  {
+    "trabajador_id": {
+      "$oid": "673c963ddc4801c43d000020"
+    },
+    "usuario" : "lucHer",
+    "contraseña": "6jlkasl"
+  }
+)
+
+
+mongo -u  mongoadmin -p 123456 --authenticationDatabase crud

@@ -28,6 +28,21 @@
     $crud = new Crud();
     $datos = $crud->listarDatos("clientes");
 
+    /*$datos2 = array(
+        "contacto" => array (
+            "_id" => new MongoDB\BSON\ObjectId("673711df1d6d7cf95e03c601")
+        ),
+        "contraseña" => "asdf"
+    );*/
+
+    $datos2 = array (
+        "cliente" => new MongoDB\BSON\ObjectId("673720081d6d7cf95e03c60d"),
+        "usuario" => "asdfasdfasd",
+        "contraseña" => "jjj"
+    );
+
+    $crud->añadirDatos("contraseñasClientes", $datos2);
+
     foreach($datos as $item) {
         echo $item->ciudad . " ";
     }

@@ -7,7 +7,7 @@ class Usuario extends Conexion {
     public function __construct() {
         parent::__construct();
     }
-    public function isValido($usuario, $contraseña) {
+    public function isValido($usuario, $contraseña, $id) {
         try {
             $conexion = parent::conectar();
             $coleccion = $conexion->usuario;

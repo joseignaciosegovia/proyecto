@@ -1,0 +1,20 @@
+[{
+    "nombre" : "Antonio López",
+    "departamento" : "Compras",
+    "fecha_contratacion" : "01-04-2021"
+  },
+  {
+    "nombre" : "Juan Garcia",
+    "departamento" : "Análisis",
+    "fecha_contratacion" : "03-10-2023"
+  },
+  {
+    "nombre" : "María Fernández",
+    "departamento" : "Gestión",
+    "fecha_contratacion" : "13-05-2022"
+  },
+  {
+    "nombre" : "Lucía Hernández",
+    "departamento" : "Servicio Técnico",
+    "fecha_contratacion" : "11-01-2021"
+  }]
