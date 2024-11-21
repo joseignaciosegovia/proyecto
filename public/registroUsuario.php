@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    function error($mensaje) {
+        $_SESSION['error'] = $mensaje;
+        header('Location:registroUsuario.php');
+        die();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -15,26 +24,87 @@
     </head>
     <body>
     <?php
+        /*spl_autoload_register(function ($class) {
+            require "/../clases/" . $class . ".php";
+        });*/
+
+        require_once __DIR__ . "/../clases/Cliente.php";
+        require_once __DIR__ . "/../clases/Conexion.inc.php";
+        require_once __DIR__ . "/../clases/Crud.php";
+
+        /*$cliente = new Cliente("usuario", "contraseña", "nombre", "direccion", "ciudad", "email@hotmail.com", 66);
+        $cliente->compras = "";
+        $cliente->deseos = "";
+        $cliente->quejas = "";
+
+        $prueba = new Prueba("nombre");
+        $prueba->nombre = "nombre";
+
+        $pruebaJSON = json_encode($prueba);
+
+        echo $cliente->nombre;
+
+        $jsonCliente = json_encode($array);
+
+        echo $jsonCliente;
+        echo "</br>";*/
+
+        function nombreNoVacio(&$nombre) {
+            // Comprobamos que el nombre no esté vacío
+            if (strlen($nombre) == 0) {
+                error("Error el Nombre no puede estar en blanco");
+            }
+
+            // Ponemos la primera letra de cada palabra en mayúsculas
+            $nombre = ucwords($nombre); 
+        }
+
+        function usuarioNoRepetido($usuario, $crud) {
+            $crud->listarDatos("clientes", "{usuario:$usuario}");
+        }
+        
         if (isset($_POST['enviar'])) {
-            //recogemos los datos del formulario, trimamos las cadenas
+            $crud = new Crud();
+
+            // Recogemos los datos del formulario
+            // Trimamos las cadenas
             $nombre = trim($_POST['nombre']);
             $usuario = trim($_POST['usuario']);
+            $contraseña = trim($_POST['contraseña']);
             $direccion = $_POST['direccion'];
-            $des = trim($_POST['descripcion']);
             $ciudad = $_POST['ciudad'];
             $email = $_POST['email'];
             $telefono = $_POST['telefono'];
-            comprobar($nombre, $usuario);
-            // si hemos llegado aqui todo ha ido bien vamos a crear el registro
-            $producto->setNombre($nombre);
-            $producto->setNombre_corto($usuario);
-            $producto->setPvp($direccion);
-            $producto->setFamilia($ciudad);
-            $producto->setDescripcion($des);
-            $producto->create();
-            $_SESSION['mensaje'] = 'Producto creado Correctamente';
-            $producto = null;
-            header('Location: listado.php');
+
+            nombreNoVacio($nombre);
+
+            $respuesta = $crud->obtenerDatos("clientes", ["usuario" => $usuario], ["usuario" => true]);
+            if($respuesta != null) {
+                error("El usuario está repetido");
+            }
+            
+            $cliente = new Cliente($usuario, $contraseña, $nombre, $direccion, $ciudad, $email, $telefono);
+
+            $arrayCliente = [
+                "usuario" => $cliente->usuario,
+                "contraseña" => $cliente->contraseña,
+                "nombreCompleto" => $cliente->nombreCompleto,
+                "direccion" => $cliente->direccion,
+                "ciudad" => $cliente->ciudad,
+                "email" => $cliente->email,
+                "telefono" => $cliente->telefono,
+                "compras" => "",
+                "deseos" => "",
+                "quejas" => ""
+            ];
+
+            $crud->añadirDatos("clientes", $arrayCliente);
+            
+            $_SESSION['mensaje'] = 'Cliente creado Correctamente';
+
+            // MOSTRAR MENSAJE DE USUARIO CREADO CORRECTAMENTE
+
+            header('Location:../index.html');
         } else {
     ?>
         <form name="crear" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -44,10 +114,16 @@
                     <input type="text" class="form-control" id="nom" placeholder="Nombre Completo" name="nombre" required>
                 </div>
             </div>
-            <div>
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="usu">Nombre de usuario</label>
                     <input type="text" class="form-control" id="usu" placeholder="Nombre de usuario" name="usuario" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="con">Contraseña</label>
+                    <input type="password" class="form-control" id="con" placeholder="Contraseña" name="contraseña" required>
                 </div>
             </div>
             <div class="form-row">
@@ -76,8 +152,15 @@
             </div>
             <button type="submit" class="btn btn-primary mr-3" name="enviar">Crear</button>
             <input type="reset" value="Limpiar" class="btn btn-success mr-3">
-            <a href="listado.php" class="btn btn-info">Volver</a>
         </form>
+        <?php
+            if (isset($_SESSION['error'])) {
+                echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
+                echo $_SESSION['error'];
+                unset($_SESSION['error']);
+                echo "</div>";
+            }
+        ?>
+        <?php } ?>
     </body>
-    <?php } ?>
 </html>

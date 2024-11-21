@@ -6,7 +6,7 @@ spl_autoload_register(function ($class) {
 });
 function error($mensaje) {
     $_SESSION['error'] = $mensaje;
-    header('Location:login.php');
+    //header('Location:login.php');
     die();
 }
 
@@ -33,14 +33,14 @@ if (isset($_POST['login'])) {
     if (strlen($nombre) == 0 || strlen($pass) == 0) {
         error("Error, El nombre o la contraseña no pueden contener solo espacios en blancos.");
     }
-    $usuario = new Usuario();
+    $usuario = new Cliente();
     if (!$usuario->isValido($nombre, $pass)) {
         $usuario = null;
         error("Credenciales Inválidas");
     }
     $usuario = null;
     $_SESSION['nombre'] = $nombre;
-    header('Location:listado.php');
+    //header('Location:listado.php');
 } else {
     ?>
     <div class="container mt-5">

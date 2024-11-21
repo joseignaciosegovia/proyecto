@@ -24,12 +24,13 @@
             }
         }
 
-        public function obtenerDatos($coleccion, $id) {
+        public function obtenerDatos($coleccion, $consulta, $opciones) {
             try {
                 $conexion = parent::conectar();
-                $datos = $conexion->$coleccion->findOne(
+                /*$datos = $conexion->$coleccion->findOne(
                     ['_id' => new MongoDB\BSON\ObjectId($id)]
-                );
+                );*/
+                $datos = $conexion->$coleccion->findOne($consulta, $opciones);
 
                 return $datos;
             } catch(\Throwable $th) {
