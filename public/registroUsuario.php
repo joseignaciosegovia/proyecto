@@ -87,7 +87,6 @@
 
             $arrayCliente = [
                 "usuario" => $cliente->usuario,
-                "contraseña" => $cliente->contraseña,
                 "nombreCompleto" => $cliente->nombreCompleto,
                 "direccion" => $cliente->direccion,
                 "ciudad" => $cliente->ciudad,
@@ -95,10 +94,19 @@
                 "telefono" => $cliente->telefono,
                 "compras" => "",
                 "deseos" => "",
-                "quejas" => ""
+                "quejas" => "",
+                "_id" => new MongoDB\BSON\ObjectId()
             ];
 
-            $crud->añadirDatos("clientes", $arrayCliente);
+            $resultado = $crud->añadirDatos("clientes", $arrayCliente, []);
+
+            $arrayContraseñaCliente = [
+                "cliente_id" => $arrayCliente['_id'],
+                "usuario" => $cliente->usuario,
+                "contraseña" => $cliente->contraseña
+            ];
+
+            $crud->añadirDatos("contraseñasClientes", $arrayContraseñaCliente, []);
             
             $_SESSION['mensaje'] = 'Cliente creado Correctamente';
 

@@ -1,12 +1,16 @@
 <?php
 session_start();
+
+require_once __DIR__ . "/../clases/Cliente.php";
+require_once __DIR__ . "/../clases/Conexion.inc.php";
+
 //Hacemos el autoload de las clases
-spl_autoload_register(function ($class) {
+/*spl_autoload_register(function ($class) {
     require "clases/" . $class . ".php";
-});
+});*/
 function error($mensaje) {
     $_SESSION['error'] = $mensaje;
-    //header('Location:login.php');
+    header('Location:accesoUsuario.php');
     die();
 }
 
@@ -29,18 +33,21 @@ function error($mensaje) {
 <?php
 if (isset($_POST['login'])) {
     $nombre = trim($_POST['usuario']);
-    $pass = trim($_POST['pass']);
-    if (strlen($nombre) == 0 || strlen($pass) == 0) {
+    $contraseña = trim($_POST['pass']);
+    if (strlen($nombre) == 0 || strlen($contraseña) == 0) {
         error("Error, El nombre o la contraseña no pueden contener solo espacios en blancos.");
     }
     $usuario = new Cliente();
-    if (!$usuario->isValido($nombre, $pass)) {
+    if (!$usuario->isValido($nombre, $contraseña)) {
         $usuario = null;
         error("Credenciales Inválidas");
     }
     $usuario = null;
     $_SESSION['nombre'] = $nombre;
-    //header('Location:listado.php');
+
+    // MOSTRAR UN MENSAJE DE LOGEO CORRECTO Y QUE EL USUARIO PUEDA ACCEDER A SU INFORMACIÓN
+
+    header('Location:../index.html');
 } else {
     ?>
     <div class="container mt-5">

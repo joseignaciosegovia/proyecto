@@ -3,10 +3,10 @@
 
     class Crud extends Conexion {
 
-        public function añadirDatos($coleccion, $datos) {
+        public function añadirDatos($coleccion, $datos, $opciones) {
             try {
                 $conexion = parent::conectar();
-                $resultado = $conexion->$coleccion->insertOne($datos);
+                $resultado = $conexion->$coleccion->insertOne($datos, $opciones);
 
                 return $resultado;
             } catch(\Throwable $th) {

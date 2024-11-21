@@ -58,14 +58,16 @@ class Cliente extends Conexion {
     public function isValido($usuario, $contraseña) {
         try {
             $conexion = parent::conectar();
-            $resultado = $conexion->usuario->findOne(
-                ['usuario' => $usuario,
-                'contraseña' => $contraseña]
-            );
+            $consulta = [
+                "usuario" => $usuario,
+                "contraseña" => $contraseña
+            ];
+            $resultado = $conexion->contraseñasClientes->findOne($consulta, []);
         } catch(\Throwable $th) {
-            $th->getMessage();
+            return $th->getMessage();
         }
-        if ($resultado) return true;
+
+        if ($resultado != null) return true;
         return false;
     }
 }
