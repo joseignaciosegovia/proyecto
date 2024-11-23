@@ -4,8 +4,8 @@ class Cliente extends Conexion {
     private $usuario;
     private $contraseña;
     private $nombreCompleto;
+    private $localidad;
     private $direccion;
-    private $ciudad;
     private $email;
     private $telefono;
     private $compras;
@@ -23,8 +23,8 @@ class Cliente extends Conexion {
                 $this->usuario = func_get_arg(0);
                 $this->contraseña = func_get_arg(1);
                 $this->nombreCompleto = func_get_arg(2);
-                $this->direccion = func_get_arg(3);
-                $this->ciudad = func_get_arg(4);
+                $this->localidad = func_get_arg(3);
+                $this->direccion = func_get_arg(4);
                 $this->email = func_get_arg(5);
                 $this->telefono =func_get_arg(6);
                 break;

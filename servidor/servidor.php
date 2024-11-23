@@ -43,11 +43,12 @@
                 if ($trabajador == null) {
                     error("Credenciales Inválidas");
                 }
-                $_SESSION['nombre'] = $nombre;
+                $_SESSION['trabajador'] = $nombre;
+                $_SESSION['departamento'] = $trabajador->departamento;
 
                 // MOSTRAR UN MENSAJE DE LOGEO CORRECTO Y QUE EL USUARIO PUEDA ACCEDER A SU INFORMACIÓN
 
-                header('Location:../index.html');
+                header('Location:intranet.php');
             } else {
         ?>
         <h1 style="text-align:center;">Intranet</h1>

@@ -32,23 +32,6 @@
         require_once __DIR__ . "/../clases/Conexion.inc.php";
         require_once __DIR__ . "/../clases/Crud.php";
 
-        /*$cliente = new Cliente("usuario", "contraseña", "nombre", "direccion", "ciudad", "email@hotmail.com", 66);
-        $cliente->compras = "";
-        $cliente->deseos = "";
-        $cliente->quejas = "";
-
-        $prueba = new Prueba("nombre");
-        $prueba->nombre = "nombre";
-
-        $pruebaJSON = json_encode($prueba);
-
-        echo $cliente->nombre;
-
-        $jsonCliente = json_encode($array);
-
-        echo $jsonCliente;
-        echo "</br>";*/
-
         function nombreNoVacio(&$nombre) {
             // Comprobamos que el nombre no esté vacío
             if (strlen($nombre) == 0) {
@@ -71,8 +54,8 @@
             $nombre = trim($_POST['nombre']);
             $trabajador = trim($_POST['usuario']);
             $contraseña = trim($_POST['contraseña']);
+            $localidad = $_POST['localidad'];
             $direccion = $_POST['direccion'];
-            $ciudad = $_POST['ciudad'];
             $email = $_POST['email'];
             $telefono = $_POST['telefono'];
 
@@ -83,13 +66,13 @@
                 error("El usuario está repetido");
             }
             
-            $cliente = new Cliente($trabajador, $contraseña, $nombre, $direccion, $ciudad, $email, $telefono);
+            $cliente = new Cliente($trabajador, $contraseña, $nombre, $localidad, $direccion, $email, $telefono);
 
             $arrayCliente = [
                 "usuario" => $cliente->usuario,
                 "nombreCompleto" => $cliente->nombreCompleto,
+                "localidad" => $cliente->localidad,
                 "direccion" => $cliente->direccion,
-                "ciudad" => $cliente->ciudad,
                 "email" => $cliente->email,
                 "telefono" => $cliente->telefono,
                 "compras" => "",
@@ -106,11 +89,16 @@
                 "contraseña" => $cliente->contraseña
             ];
 
-            $crud->añadirDatos("contraseñasClientes", $arrayContraseñaCliente, []);
+            $crud->añadirDatos("contraseñasCl", $arrayContraseñaCliente, []);
+
+            // Ventana que indica que el cliente se ha creado correctamente
+            // NO MUESTRA LA VENTANA
+            echo "<dialog open>
+              <p>El perfil se ha actualizado correctamente</p>
+            <button onclick=\"this.parentElement.close()\">OK</button>
+            </dialog>";
             
             $_SESSION['mensaje'] = 'Cliente creado Correctamente';
-
-            // MOSTRAR MENSAJE DE USUARIO CREADO CORRECTAMENTE
 
             header('Location:../index.html');
         } else {
@@ -142,8 +130,8 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="ciu">Ciudad</label>
-                    <input type="text" class="form-control" id="ciu" placeholder="Ciudad" name="ciudad" required>
+                    <label for="ciu">Localidad</label>
+                    <input type="text" class="form-control" id="ciu" placeholder="Localidad" name="localidad" required>
                 </div>
             </div>
             <div class="form-row">

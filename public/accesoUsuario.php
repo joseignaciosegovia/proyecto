@@ -45,7 +45,7 @@ function error($mensaje) {
                 error("Credenciales Inválidas");
             }
 
-            $_SESSION['nombre'] = $nombre;
+            $_SESSION['cliente'] = $nombre;
 
             // MOSTRAR UN MENSAJE DE LOGEO CORRECTO Y QUE EL USUARIO PUEDA ACCEDER A SU INFORMACIÓN
 
@@ -57,7 +57,7 @@ function error($mensaje) {
                     <div class="card">
                         <div class="card-header">
                             <h3>Iniciar sesión</h3>
-                            <h4>¿No tienes cuenta? <a>Regístrate aquí</a></h4>
+                            <h4>¿No tienes cuenta? <a href="registroUsuario.php">Regístrate aquí</a></h4>
                         </div>
                         <div class="card-body">
                             <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>

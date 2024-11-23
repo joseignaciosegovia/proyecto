@@ -38,11 +38,11 @@
             }
         }
 
-        public function actualizarDatos($coleccion, $id, $datos) {
+        public function actualizarDatos($coleccion, $consulta, $datos) {
             try {
                 $conexion = parent::conectar();
                 $resultado = $conexion->$coleccion->updateOne(
-                    ['_id' => new MongoDB\BSON\ObjectId($id)],
+                    $consulta,
                     [
                         '$set' => $datos
                     ]

@@ -3,7 +3,7 @@ let carrito = document.querySelector('.bi-cart-dash');
 let lupa = document.querySelector('.bi-search');
 let usuario = document.querySelector('.bi-person-circle');
 let cesta = document.getElementById('cesta');
-let crearUsuario = document.getElementById('usuario');
+let seccionUsuario = document.getElementById('usuario');
 let cerrarCesta = document.querySelector('#cerrarCesta');
 
 // Botón para comprar
@@ -31,7 +31,27 @@ carrito.addEventListener("click", () => {
 
 // Pulsamos en el icono del usuario
 usuario.addEventListener("click", () => {
-    crearUsuario.style.display = "block";
+
+    // Comprobamos si hay un usuario logeado
+
+    fetch('public/devolverCliente.php', {
+        method: 'get'
+      }).then ((response) => response.json()
+      ).then(function (data) {
+        if(data){
+            seccionUsuario.replaceChildren();
+            seccionUsuario.insertAdjacentHTML('beforeend', `</br></br><a href="public/perfil.php">Perfil</a></br>
+                <a>Historial de compras</a></br>
+                <a>Lista de deseos</a></br>
+                <a>Quejas</a></br>
+                <i class="bi bi-x-circle" id="cerrarUsuario"></i>`);
+        }
+            seccionUsuario.style.display = "block";
+        // FUNCIONA MAL!!!!!!!
+      }).catch(function (err) {
+        console.log("Ha habido un error");
+        seccionUsuario.style.display = "block";
+      });
 });
 
 // Pulsamos el botón de cerrar en el menú de la cesta
@@ -40,13 +60,13 @@ cerrarCesta.addEventListener("click", () => {
 });
 
 // Pulsamos el botón de cerrar en el menú del usuario
-crearUsuario.addEventListener("click", () => {
-    crearUsuario.style.display = "none";
+seccionUsuario.addEventListener("click", () => {
+    seccionUsuario.style.display = "none";
 });
 
 window.addEventListener('load', function() {
     cesta.style.display = "none";
-    crearUsuario.style.display = "none";
+    seccionUsuario.style.display = "none";
     addEvents();
 
     novedades();
