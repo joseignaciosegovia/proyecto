@@ -69,7 +69,7 @@
             // Recogemos los datos del formulario
             // Trimamos las cadenas
             $nombre = trim($_POST['nombre']);
-            $usuario = trim($_POST['usuario']);
+            $trabajador = trim($_POST['usuario']);
             $contraseña = trim($_POST['contraseña']);
             $direccion = $_POST['direccion'];
             $ciudad = $_POST['ciudad'];
@@ -78,12 +78,12 @@
 
             nombreNoVacio($nombre);
 
-            $respuesta = $crud->obtenerDatos("clientes", ["usuario" => $usuario], ["usuario" => true]);
+            $respuesta = $crud->obtenerDatos("clientes", ["usuario" => $trabajador], ["usuario" => true]);
             if($respuesta != null) {
                 error("El usuario está repetido");
             }
             
-            $cliente = new Cliente($usuario, $contraseña, $nombre, $direccion, $ciudad, $email, $telefono);
+            $cliente = new Cliente($trabajador, $contraseña, $nombre, $direccion, $ciudad, $email, $telefono);
 
             $arrayCliente = [
                 "usuario" => $cliente->usuario,

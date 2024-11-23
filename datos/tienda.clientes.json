@@ -1,0 +1,14 @@
+[{
+  "_id": {
+    "$oid": "67418623531b021769326b4e"
+  },
+  "usuario": "jot",
+  "nombreCompleto": "José Tomás",
+  "direccion": "Calle Tercia",
+  "ciudad": "Moral",
+  "email": "jot@gmail.com",
+  "telefono": "669039125",
+  "compras": "",
+  "deseos": "",
+  "quejas": ""
+}]

@@ -1,39 +1,107 @@
+<?php
+    session_start();
+
+    require_once __DIR__ . "/../clases/Trabajador.php";
+    require_once __DIR__ . "/../clases/Conexion.inc.php";
+
+    //Hacemos el autoload de las clases
+    /*spl_autoload_register(function ($class) {
+        require "clases/" . $class . ".php";
+    });*/
+    function error($mensaje) {
+        $_SESSION['error'] = $mensaje;
+        header('Location:servidor.php');
+        die();
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Bootstrap CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!--Fontawesome CDN-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+            integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <title>Listado</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </head>
     <body style="background-color:powderblue;">
+        <?php
+            if (isset($_POST['login'])) {
+                $nombre = trim($_POST['usuario']);
+                $contraseña = trim($_POST['pass']);
+                if (strlen($nombre) == 0 || strlen($contraseña) == 0) {
+                    error("Error, El nombre o la contraseña no pueden contener solo espacios en blancos.");
+                }
+
+                // Comprobamos si existe un trabajador con el usuario y la contraseña introducidos
+                $trabajador = Trabajador::isValido($nombre, $contraseña);
+                // Si no existe, mostramos el error y actualizamos la página
+                if ($trabajador == null) {
+                    error("Credenciales Inválidas");
+                }
+                $_SESSION['nombre'] = $nombre;
+
+                // MOSTRAR UN MENSAJE DE LOGEO CORRECTO Y QUE EL USUARIO PUEDA ACCEDER A SU INFORMACIÓN
+
+                header('Location:../index.html');
+            } else {
+        ?>
         <h1 style="text-align:center;">Intranet</h1>
-        <form method="post">
-            <div class="container" style="margin: auto;width: 60%;">
-                <div class="row align-items-start">
-                    <div class="col">
-                        Usuario:</br> <input type="text" placeholder="Usuario" name="Usuario"></br>
-                        Contraseña:</br> <input type="text" placeholder="Contraseña" name="Contraseña"></br>
-                        </br><input type="submit" value="Acceder" name="Acceder">
+        <div class="container mt-5">
+                <div class="d-flex justify-content-center h-100">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Iniciar sesión a la Intranet</h3>
+                        </div>
+                        <div class="card-body">
+                            <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="usuario" name='usuario' required>
+
+                                </div>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Login" class="btn float-right btn-success" name='login'>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+                <?php
+                    if (isset($_SESSION['error'])) {
+                        echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
+                        echo "</div>";
+                    }
+            ?>
+        </div>
+        <?php } ?>
     </body>
 </html>
 
 <?php
-    require_once __DIR__ . "/../clases/Crud.php";
-    $crud = new Crud();
+    /*$crud = new Crud();
     $datos = $crud->listarDatos("clientes");
 
-    /*$datos2 = array(
-        "contacto" => array (
-            "_id" => new MongoDB\BSON\ObjectId("673711df1d6d7cf95e03c601")
-        ),
-        "contraseña" => "asdf"
-    );*/
+    //$datos2 = array(
+      //  "contacto" => array (
+        //    "_id" => new MongoDB\BSON\ObjectId("673711df1d6d7cf95e03c601")
+        //),
+        //"contraseña" => "asdf"
+    //);
 
     $datos2 = array (
         "cliente" => new MongoDB\BSON\ObjectId("673720081d6d7cf95e03c60d"),
@@ -41,7 +109,7 @@
         "contraseña" => "jjj"
     );
 
-    $crud->añadirDatos("contraseñasClientes", $datos2);
+    $crud->añadirDatos("contraseñasClientes", $datos2, []);
 
     foreach($datos as $item) {
         echo $item->ciudad . " ";
@@ -53,5 +121,5 @@
 
     foreach($datos as $item) {
         echo $item->usuario . " ";
-    }
+    }*/
 ?>

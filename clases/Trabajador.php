@@ -1,16 +1,13 @@
 <?php
 require_once __DIR__ . "/Conexion.inc.php";
-class Cliente extends Conexion {
+class Trabajador extends Conexion {
     private $usuario;
     private $contraseña;
     private $nombreCompleto;
-    private $direccion;
-    private $ciudad;
+    private $departamento;
+    private $fechaContratacion;
     private $email;
-    private $telefono;
-    private $compras;
-    private $deseos;
-    private $quejas;
+    private $salario;
 
     public function __construct() {
         $num = func_num_args(); //guardamos el número de argumentos
@@ -23,10 +20,10 @@ class Cliente extends Conexion {
                 $this->usuario = func_get_arg(0);
                 $this->contraseña = func_get_arg(1);
                 $this->nombreCompleto = func_get_arg(2);
-                $this->direccion = func_get_arg(3);
-                $this->ciudad = func_get_arg(4);
+                $this->departamento = func_get_arg(3);
+                $this->fechaContratacion = func_get_arg(4);
                 $this->email = func_get_arg(5);
-                $this->telefono =func_get_arg(6);
+                $this->salario =func_get_arg(6);
                 break;
         }
     }
@@ -62,21 +59,21 @@ class Cliente extends Conexion {
                 "usuario" => $usuario,
                 "contraseña" => $contraseña
             ];
-            $resultado = $conexion->contraseñasCl->findOne($consulta, []);
+            $resultado = $conexion->contraseñasTr->findOne($consulta, []);
 
             // Si ha encontrado un usuario
             if($resultado) {
-                // Buscamos el cliente de la colección de clientes que tenga el identificador
+                // Buscamos el trabajador de la colección de trabajadores que tenga el identificador
                 $consulta = [
-                    "_id" => $resultado->cliente_id
+                    "_id" => $resultado->trabajador_id
                 ];
-                $resultado = $conexion->clientes->findOne($consulta, []);
+                $resultado = $conexion->trabajadores->findOne($consulta, []);
             }
         } catch(\Throwable $th) {
             return $th->getMessage();
         }
 
-        // Devolvemos los datos del cliente
+        // Devolvemos los datos del trabajador
         return $resultado;
     }
 }

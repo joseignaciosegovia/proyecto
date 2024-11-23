@@ -2,7 +2,7 @@
     require __DIR__ . '/../vendor/autoload.php';
 
     class Conexion {
-        public function conectar(){
+        public static function conectar(){
             try {
                 $host = "127.0.0.1";
                 $puerto = "27017";

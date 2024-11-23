@@ -14,6 +14,14 @@ buy_btn.addEventListener("click", handle_buyOrden);
 const btnTrabajadores = document.querySelector(".btn-trabajadores");
 btnTrabajadores.addEventListener("click", handle_trabajadores);
 
+// Botón para el acceso de los clientes
+const btnClientes = document.querySelector(".btn-usu");
+btnClientes.addEventListener("click", handle_clientes);
+
+// Botón para el registro de los clientes
+const btnRegistroClientes = document.querySelector(".btn-login");
+btnRegistroClientes.addEventListener("click", handle_registroClientes);
+
 let itemsAdded = [];
 
 // Pulsamos en el icono del carrito
@@ -153,6 +161,18 @@ function handle_buyOrden() {
 function handle_trabajadores() {
     // Abrimos una pestaña con el acceso a los trabajadores
     window.open("servidor/servidor.php", "Intranet");
+}
+
+// Pulsamos el botón 'Acceso a Usuarios'
+function handle_clientes() {
+    // Abrimos en la misma pestaña el acceso a los usuarios
+    window.open("public/accesoUsuario.php", "_self");
+}
+
+// Pulsamos el botón 'Registrarse'
+function handle_registroClientes() {
+    // Abrimos en la misma pestaña el registro de los clientes
+    window.open("public/registroUsuario.php", "_self");
 }
 
 // Actualizar y renderizar
