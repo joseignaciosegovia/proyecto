@@ -59,19 +59,31 @@ class Cliente extends Conexion {
         try {
             $conexion = parent::conectar();
             $consulta = [
-                "usuario" => $usuario,
-                "contraseña" => $contraseña
+                "usuario" => $usuario
             ];
+            // Obtenemos la contraseña del documento que tiene el nombre de usuario del cliente introducido
             $resultado = $conexion->contraseñasCl->findOne($consulta, []);
 
-            // Si ha encontrado un usuario
+            // Si se ha encontrado un usuario
             if($resultado) {
-                // Buscamos el cliente de la colección de clientes que tenga el identificador
-                $consulta = [
-                    "_id" => $resultado->cliente_id
-                ];
-                $resultado = $conexion->clientes->findOne($consulta, []);
+                // Comprobamos que la contraseña es correcta
+                if(password_verify($contraseña, $resultado->contraseña)) {
+                    // Buscamos el cliente de la colección de clientes
+                    $consulta = [
+                        "_id" => $resultado->cliente_id
+                    ];
+                    $resultado = $conexion->clientes->findOne($consulta, []);
+                }
+                // Si la contraseña es incorrecta
+                else {
+                    return null;
+                }
             }
+            // Si no se ha encontrado un usuario
+            else{
+                return null;
+            }
+            
         } catch(\Throwable $th) {
             return $th->getMessage();
         }

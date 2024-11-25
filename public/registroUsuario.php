@@ -46,6 +46,7 @@
             $crud->listarDatos("clientes", "{usuario:$usuario}");
         }
         
+        // Si pulsamos el botón "Crear"
         if (isset($_POST['enviar'])) {
             $crud = new Crud();
 
@@ -86,7 +87,7 @@
             $arrayContraseñaCliente = [
                 "cliente_id" => $arrayCliente['_id'],
                 "usuario" => $cliente->usuario,
-                "contraseña" => $cliente->contraseña
+                "contraseña" => password_hash($cliente->contraseña, PASSWORD_DEFAULT)
             ];
 
             $crud->añadirDatos("contraseñasCl", $arrayContraseñaCliente, []);

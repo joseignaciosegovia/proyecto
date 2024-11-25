@@ -53,27 +53,39 @@ class Trabajador extends Conexion {
 
     // Comprueba si el acceso ha sido correcto
     public static function isValido($usuario, $contraseña) {
-        try {
+        try{
             $conexion = parent::conectar();
             $consulta = [
-                "usuario" => $usuario,
-                "contraseña" => $contraseña
+                "usuario" => $usuario
             ];
+            // Obtenemos la contraseña del documento que tiene el nombre de usuario del trabajador introducido
             $resultado = $conexion->contraseñasTr->findOne($consulta, []);
 
-            // Si ha encontrado un usuario
+            // Si se ha encontrado un usuario
             if($resultado) {
-                // Buscamos el trabajador de la colección de trabajadores que tenga el identificador
-                $consulta = [
-                    "_id" => $resultado->trabajador_id
-                ];
-                $resultado = $conexion->trabajadores->findOne($consulta, []);
+                // Comprobamos que la contraseña es correcta
+                if(password_verify($contraseña, $resultado->contraseña)) {
+                    // Buscamos el trabajador de la colección de trabajadores
+                    $consulta = [
+                        "_id" => $resultado->trabajador_id
+                    ];
+                    $resultado = $conexion->trabajadores->findOne($consulta, []);
+                }
+                // Si la contraseña es incorrecta
+                else {
+                    return null;
+                }
             }
+            // Si no se ha encontrado un usuario
+            else{
+                return null;
+            }
+            
         } catch(\Throwable $th) {
             return $th->getMessage();
         }
 
-        // Devolvemos los datos del trabajador
+        // Devolvemos los datos del cliente
         return $resultado;
     }
 }

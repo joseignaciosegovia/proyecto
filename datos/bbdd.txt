@@ -11,3 +11,17 @@ db.createUser(
 );
 
 mongo -u  mongoadmin -p 123456 --authenticationDatabase tienda
+
+Contraseñas trabajadores:
+  "usuario" : "antLop"
+  "contraseña": "zxcljk6",
+
+  "usuario" : "juaGar"
+  "contraseña": "qewjrlkvj",
+  
+  "usuario" : "marFer"
+  "contraseña": "q345jknv",
+  
+  "usuario" : "lucHer"
+  "contraseña": "6jlkasl",
+
