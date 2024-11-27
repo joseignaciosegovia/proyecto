@@ -35,7 +35,7 @@
             echo "<h3>Departamento de compras</h3>";
             echo "<h4>Productos</h4>";
             $crud = new Crud("userTienda", "1234");
-            $productos = $crud->listarDatos("productos");
+            $productos = $crud->listarDatos("productos", [], []);
                 ?>
                 <table>
                     <thead>
@@ -60,7 +60,7 @@
                     </tbody>
                 </table>
                 <?php
-                    $proveedores = $crud->listarDatos("proveedores");
+                    $proveedores = $crud->listarDatos("proveedores", [], []);
                 ?>
             <h4>Proveedores</h4>
             <table>
@@ -107,7 +107,7 @@
             echo "<h3>Departamento de gestión</h3>";
             echo "<h4>Clientes</h4>";
             $crud = new Crud("userTienda", "1234");
-            $contraseñasCl = $crud->listarDatos("contraseñasCl");
+            $contraseñasCl = $crud->listarDatos("contraseñasCl", [], []);
                 ?>
                 <table>
                     <thead>
@@ -128,7 +128,7 @@
                 <?php
             
             echo "<h4>Trabajadores</h4>";
-            $contraseñasTr = $crud->listarDatos("contraseñasTr");
+            $contraseñasTr = $crud->listarDatos("contraseñasTr", [], []);
                 ?>
                 <table>
                     <thead>
@@ -152,7 +152,7 @@
             echo "<h3>Departamento de servicio técnico</h3>";
             echo "<h4>Quejas y sugerencias de clientes</h4>";
             $crud = new Crud("userTienda", "1234");
-            $clientes = $crud->listarDatos("clientes");
+            $clientes = $crud->listarDatos("clientes", [], []);
                 ?>
                 <?php 
                     foreach($clientes as $cliente){ 

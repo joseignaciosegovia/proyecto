@@ -18,10 +18,10 @@
                 return $th->getMessage();
             }
         }
-        public function listarDatos($coleccion) {
+        public function listarDatos($coleccion, $consulta, $opciones) {
             try {
                 //$conexion = parent::conectar();
-                $datos = $this->conexion->$coleccion->find();
+                $datos = $this->conexion->$coleccion->find($consulta, $opciones);
 
                 return $datos;
             } catch(\Throwable $th) {

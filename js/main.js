@@ -10,6 +10,22 @@ let ofertas = document.querySelector('#ofertas');
 let ordenadores = document.querySelector('#ordenadores');
 let componentes = document.querySelector('#componentes');
 
+// Botón "Novedades"
+const nov_btn = document.querySelectorAll(".btn-group button")[0];
+nov_btn.addEventListener("click", cargarNovedades);
+
+// Botón "Ofertas"
+const ofe_btn = document.querySelectorAll(".btn-group button")[1];
+ofe_btn.addEventListener("click", cargarOfertas);
+
+// Botón "Ordenadores"
+const ord_btn = document.querySelectorAll(".btn-group button")[2];
+ord_btn.addEventListener("click", cargarOrdenadores);
+
+// Botón "Componentes"
+const com_btn = document.querySelectorAll(".btn-group button")[3];
+com_btn.addEventListener("click", cargarComponentes);
+
 // Botón para comprar
 const buy_btn = document.querySelector(".btn-buy");
 buy_btn.addEventListener("click", handle_buyOrden);
@@ -74,7 +90,6 @@ window.addEventListener('load', function() {
     addEvents();
 
     cargarNovedades();
-    mostrarOfertas();
 });
 
 function update() {
@@ -252,11 +267,11 @@ function cargarNovedades() {
         let seccionNovedades = document.querySelector('.divNovedades');
         for(let i = 0; i < 6; i++) {
             seccionNovedades.insertAdjacentHTML('beforeend', `<div class="productoNovedad">
-                <p>${data[i]['nombre']}</p>
-                <p>${data[i]['categoria']}</p>
-                <p>${data[i]['descripcion']}</p>
-                <p>${data[i]['precio']}</p>
-                <p>${data[i]['stock']}</p>
+                <p>Nombre: ${data[i]['nombre']}</p>
+                <p>Categoría: ${data[i]['categoria']}</p>
+                <p>Descripción: ${data[i]['descripcion']}</p>
+                <p>Precio: ${data[i]['precio']}</p>
+                <p>Stock: ${data[i]['stock']}</p>
             </div>`);
         }
         
@@ -265,8 +280,103 @@ function cargarNovedades() {
       });
 }
 
-function mostrarOfertas () {
+// Cargamos las ofertas
+function cargarOfertas() {
+    // Ocultamos el resto de secciones y mostramos la sección de ofertas
+    ofertas.style.display = "block";
+    ordenadores.style.display = "none";
+    componentes.style.display = "none";
+    novedades.style.display = "none";
+
+    ofertas.replaceChildren();
+    ofertas.insertAdjacentHTML('beforeend', `<h2>Ofertas</h2>`);
+
+    fetch('servidor/ofertas.php', {
+        method: 'get'
+      }).then ((response) => response.json()
+      ).then(function (data) {
+
+        novedades.insertAdjacentHTML('beforeend', `<div class="divOfertas"></div>`);
+        let seccionOfertas = document.querySelector('.divOfertas');
+        for(let i = 0; i < 6; i++) {
+            seccionOfertas.insertAdjacentHTML('beforeend', `<div class="productoOferta">
+                <p>Nombre: ${data[i]['nombre']}</p>
+                <p>Categoría: ${data[i]['categoria']}</p>
+                <p>Descripción: ${data[i]['descripcion']}</p>
+                <p>Precio: ${data[i]['precio']}</p>
+                <p>Stock: ${data[i]['stock']}</p>
+            </div>`);
+        }
+        
+      }).catch(function (err) {
+        console.log("Ha habido un error");
+      });
+}
+
+// Cargamos los ordenadores
+function cargarOrdenadores() {
+    // Ocultamos el resto de secciones y mostramos la sección de ordenadores
+    ofertas.style.display = "none";
+    ordenadores.style.display = "block";
+    componentes.style.display = "none";
+    novedades.style.display = "none";
     
+    ordenadores.replaceChildren();
+    ordenadores.insertAdjacentHTML('beforeend', `<h2>Ordenadores</h2>`);
+
+    fetch('servidor/ordenadores.php', {
+        method: 'get'
+      }).then ((response) => response.json()
+      ).then(function (data) {
+
+        ordenadores.insertAdjacentHTML('beforeend', `<div class="divOrdenadores"></div>`);
+        let seccionOrdenadores = document.querySelector('.divOrdenadores');
+        for(let i = 0; i < 6; i++) {
+            seccionOrdenadores.insertAdjacentHTML('beforeend', `<div class="productoOrdenador">
+                <p>Nombre: ${data[i]['nombre']}</p>
+                <p>Categoría: ${data[i]['categoria']}</p>
+                <p>Descripción: ${data[i]['descripcion']}</p>
+                <p>Precio: ${data[i]['precio']}</p>
+                <p>Stock: ${data[i]['stock']}</p>
+            </div>`);
+        }
+        
+      }).catch(function (err) {
+        console.log("Ha habido un error");
+      });
+}
+
+// Cargamos los componentes
+function cargarComponentes() {
+    // Ocultamos el resto de secciones y mostramos la sección de novedades
+    ofertas.style.display = "none";
+    ordenadores.style.display = "none";
+    componentes.style.display = "block";
+    novedades.style.display = "none";
+
+    componentes.replaceChildren();
+    componentes.insertAdjacentHTML('beforeend', `<h2>Componentes</h2>`);
+
+    fetch('servidor/componentes.php', {
+        method: 'get'
+      }).then ((response) => response.json()
+      ).then(function (data) {
+
+        componentes.insertAdjacentHTML('beforeend', `<div class="divComponentes"></div>`);
+        let seccionComponentes = document.querySelector('.divComponentes');
+        for(let i = 0; i < 6 && i < data.length; i++) {
+            seccionComponentes.insertAdjacentHTML('beforeend', `<div class="productoComponente">
+                <p>Nombre: ${data[i]['nombre']}</p>
+                <p>Categoría: ${data[i]['categoria']}</p>
+                <p>Descripción: ${data[i]['descripcion']}</p>
+                <p>Precio: ${data[i]['precio']}</p>
+                <p>Stock: ${data[i]['stock']}</p>
+            </div>`);
+        }
+        
+      }).catch(function (err) {
+        console.log("Ha habido un error");
+      });
 }
 
 
