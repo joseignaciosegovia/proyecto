@@ -1,0 +1,9 @@
+Trabajadores:
+  antLop: "zxcljk6",
+  juaGar: "qewjrlkvj",
+  marFer: "q345jknv",
+  lucHer: "6jlkasl",
+
+Clientes:
+  antL: contr,
+  rupLop: "asdf",

@@ -1,4 +1,40 @@
-use tienda;
+
+db.createRole(
+  { 
+    role: "compras3", 
+    privileges: 
+    [
+      {
+        resource: 
+        {
+          db: "tienda",
+          collection: "proveedores"
+        },
+        actions: [ "find", "insert", "update", "remove" ]
+      },
+      {
+        resource: 
+        {
+          db: "tienda",
+          collection: ""
+        },
+        actions: [ "listCollections" ]
+      }
+    ],
+    roles: [ ]
+  }
+)
+
+Solo me puedo conectar con los usuarios creados desde "admin"
+db.createUser(
+  {
+    user :  "userTienda",
+    pwd :  "1234",
+    roles :  [
+        {  role :  "compras3",  db :  "tienda"  }
+    ]
+  }
+);
 
 db.createUser(
   {
@@ -10,18 +46,4 @@ db.createUser(
   }
 );
 
-mongo -u  mongoadmin -p 123456 --authenticationDatabase tienda
-
-Contraseñas trabajadores:
-  "usuario" : "antLop"
-  "contraseña": "zxcljk6",
-
-  "usuario" : "juaGar"
-  "contraseña": "qewjrlkvj",
-  
-  "usuario" : "marFer"
-  "contraseña": "q345jknv",
-  
-  "usuario" : "lucHer"
-  "contraseña": "6jlkasl",
-
+mongo -u prueba -p 123456 --authenticationDatabase tienda

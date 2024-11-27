@@ -2,11 +2,16 @@
     require_once "Conexion.inc.php";
 
     class Crud extends Conexion {
+        private $conexion;
+
+        public function __construct($usuario = "mongoadmin", $contraseña = "123456") {
+            $this->conexion = parent::conectar($usuario, $contraseña);
+        }
 
         public function añadirDatos($coleccion, $datos, $opciones) {
             try {
-                $conexion = parent::conectar();
-                $resultado = $conexion->$coleccion->insertOne($datos, $opciones);
+                //$conexion = parent::conectar();
+                $resultado = $this->conexion->$coleccion->insertOne($datos, $opciones);
 
                 return $resultado;
             } catch(\Throwable $th) {
@@ -15,8 +20,8 @@
         }
         public function listarDatos($coleccion) {
             try {
-                $conexion = parent::conectar();
-                $datos = $conexion->$coleccion->find();
+                //$conexion = parent::conectar();
+                $datos = $this->conexion->$coleccion->find();
 
                 return $datos;
             } catch(\Throwable $th) {
@@ -26,11 +31,8 @@
 
         public function obtenerDatos($coleccion, $consulta, $opciones) {
             try {
-                $conexion = parent::conectar();
-                /*$datos = $conexion->$coleccion->findOne(
-                    ['_id' => new MongoDB\BSON\ObjectId($id)]
-                );*/
-                $datos = $conexion->$coleccion->findOne($consulta, $opciones);
+                //$conexion = parent::conectar();
+                $datos = $this->conexion->$coleccion->findOne($consulta, $opciones);
 
                 return $datos;
             } catch(\Throwable $th) {
@@ -40,8 +42,8 @@
 
         public function actualizarDatos($coleccion, $consulta, $datos) {
             try {
-                $conexion = parent::conectar();
-                $resultado = $conexion->$coleccion->updateOne(
+                //$conexion = parent::conectar();
+                $resultado = $this->conexion->$coleccion->updateOne(
                     $consulta,
                     [
                         '$set' => $datos
@@ -56,8 +58,8 @@
 
         public function eliminarDatos($coleccion, $id) {
             try {
-                $conexion = parent::conectar();
-                $resultado = $conexion->$coleccion->deleteOne(
+                //$conexion = parent::conectar();
+                $resultado = $this->conexion->$coleccion->deleteOne(
                     ['_id' => new MongoDB\BSON\ObjectId($id)]
                 );
 
