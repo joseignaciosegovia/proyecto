@@ -258,8 +258,12 @@ function cargarNovedades() {
     novedades.replaceChildren();
     novedades.insertAdjacentHTML('beforeend', `<h2>Novedades</h2>`);
 
-    fetch('servidor/novedades.php', {
-        method: 'get'
+    const formData = new FormData();
+    formData.append("data", "novedades");
+
+    fetch('servidor/mostrarProductos.php', {
+        method: 'post',
+        body: formData
       }).then ((response) => response.json()
       ).then(function (data) {
 
@@ -291,8 +295,12 @@ function cargarOfertas() {
     ofertas.replaceChildren();
     ofertas.insertAdjacentHTML('beforeend', `<h2>Ofertas</h2>`);
 
-    fetch('servidor/ofertas.php', {
-        method: 'get'
+    const formData = new FormData();
+    formData.append("data", "ofertas");
+
+    fetch('servidor/mostrarProductos.php', {
+        method: 'post',
+        body: formData
       }).then ((response) => response.json()
       ).then(function (data) {
 
@@ -324,8 +332,12 @@ function cargarOrdenadores() {
     ordenadores.replaceChildren();
     ordenadores.insertAdjacentHTML('beforeend', `<h2>Ordenadores</h2>`);
 
-    fetch('servidor/ordenadores.php', {
-        method: 'get'
+    const formData = new FormData();
+    formData.append("data", "ordenadores");
+
+    fetch('servidor/mostrarProductos.php', {
+        method: 'post',
+        body: formData
       }).then ((response) => response.json()
       ).then(function (data) {
 
@@ -357,8 +369,12 @@ function cargarComponentes() {
     componentes.replaceChildren();
     componentes.insertAdjacentHTML('beforeend', `<h2>Componentes</h2>`);
 
-    fetch('servidor/componentes.php', {
-        method: 'get'
+    const formData = new FormData();
+    formData.append("data", "componentes");
+
+    fetch('servidor/mostrarProductos.php', {
+        method: 'post',
+        body: formData
       }).then ((response) => response.json()
       ).then(function (data) {
 
