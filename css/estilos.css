@@ -54,6 +54,14 @@ h1 {
     transition: 1.7s;
 }
 
+.divNovedades {
+    display: flex;
+}
+
+.productoNovedad {
+    border: 1px solid red;
+}
+
 .cart.active{
     right: 0;
     transition: .5s;

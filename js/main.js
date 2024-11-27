@@ -5,6 +5,10 @@ let usuario = document.querySelector('.bi-person-circle');
 let cesta = document.getElementById('cesta');
 let seccionUsuario = document.getElementById('usuario');
 let cerrarCesta = document.querySelector('#cerrarCesta');
+let novedades = document.querySelector('#novedades');
+let ofertas = document.querySelector('#ofertas');
+let ordenadores = document.querySelector('#ordenadores');
+let componentes = document.querySelector('#componentes');
 
 // Botón para comprar
 const buy_btn = document.querySelector(".btn-buy");
@@ -69,8 +73,8 @@ window.addEventListener('load', function() {
     seccionUsuario.style.display = "none";
     addEvents();
 
-    novedades();
-    ofertas();
+    cargarNovedades();
+    mostrarOfertas();
 });
 
 function update() {
@@ -229,11 +233,39 @@ function cartBoxComponent(title, price, imgSrc) {
     `;
 }
 
-function novedades() {
+// Cargamos las novedades
+function cargarNovedades() {
+    // Ocultamos el resto de secciones y mostramos la sección de novedades
+    ofertas.style.display = "none";
+    ordenadores.style.display = "none";
+    componentes.style.display = "none";
+    //novedades.style.display = "block";
+    novedades.replaceChildren();
+    novedades.insertAdjacentHTML('beforeend', `<h2>Novedades</h2>`);
 
+    fetch('servidor/novedades.php', {
+        method: 'get'
+      }).then ((response) => response.json()
+      ).then(function (data) {
+
+        novedades.insertAdjacentHTML('beforeend', `<div class="divNovedades"></div>`);
+        let seccionNovedades = document.querySelector('.divNovedades');
+        for(let i = 0; i < 6; i++) {
+            seccionNovedades.insertAdjacentHTML('beforeend', `<div class="productoNovedad">
+                <p>${data[i]['nombre']}</p>
+                <p>${data[i]['categoria']}</p>
+                <p>${data[i]['descripcion']}</p>
+                <p>${data[i]['precio']}</p>
+                <p>${data[i]['stock']}</p>
+            </div>`);
+        }
+        
+      }).catch(function (err) {
+        console.log("Ha habido un error");
+      });
 }
 
-function ofertas () {
+function mostrarOfertas () {
     
 }
 
