@@ -76,9 +76,9 @@
                 "direccion" => $cliente->direccion,
                 "email" => $cliente->email,
                 "telefono" => $cliente->telefono,
-                "compras" => "",
-                "deseos" => "",
-                "quejas" => "",
+                "compras" => [],
+                "deseos" => [],
+                "quejas" => [],
                 "_id" => new MongoDB\BSON\ObjectId()
             ];
 

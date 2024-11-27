@@ -43,7 +43,7 @@ usuario.addEventListener("click", () => {
             seccionUsuario.insertAdjacentHTML('beforeend', `</br></br><a href="public/perfil.php">Perfil</a></br>
                 <a>Historial de compras</a></br>
                 <a>Lista de deseos</a></br>
-                <a>Quejas</a></br>
+                <a href="public/Quejas.php">Quejas y sugerencias</a></br>
                 <i class="bi bi-x-circle" id="cerrarUsuario"></i>`);
         }
             seccionUsuario.style.display = "block";

@@ -11,22 +11,19 @@
         exit();
     }
 
-    // Si pulsamos el botón de actualizar perfil
-    if (isset($_POST['Actualizar'])) {
-        $cliente = [
-            "nombreCompleto" => $_POST['Nombre'],
-            "usuario" => $_POST['Usuario'],
-            "telefono" => $_POST['Telefono'],
-            "direccion" => $_POST['Direccion'],
-            "localidad" => $_POST['Localidad']
-        ];
+    // Si pulsamos el botón de "Enviar"
+    if (isset($_POST['Enviar'])) {
 
-        // Actualizamos el perfil en la base de datos
-        $crud->actualizarDatos("clientes", ["usuario" => $cliente['usuario']], $cliente);
+        $cliente = $crud->obtenerDatos("clientes", ["usuario" => $_SESSION['cliente']], []);
+        // Añadimos la nueva queja/sugerencia al final del array de quejas/sugerencias
+        $cliente->quejas[] = ["descripcion" => $_POST['Queja'], "fecha" => date('Y-m-d h:i:s a', time())];
+
+        // Añadimos la queja/sugerencia al perfil del usuario en la base de datos
+        $crud->actualizarDatos("clientes", ["usuario" => $_SESSION['cliente']], ["quejas" => $cliente->quejas]);
 
         // Ventana que indica que el perfil se ha actualizado correctamente
         echo "<dialog open>
-              <p>El perfil se ha actualizado correctamente</p>
+              <p>La queja o sugerencia se ha realizado correctamente</p>
             <button onclick=\"this.parentElement.close()\">OK</button>
         </dialog>";
     }
@@ -37,7 +34,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Perfil Usuario</title>
+        <title>Quejas y sugerencias del Usuario</title>
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -86,52 +83,19 @@
 
         <div>
         <div class="row">
-            <?php 
-                $cliente = $crud->obtenerDatos("clientes", ["usuario" => $_SESSION['cliente']], []);
-            ?>
-            
-            <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                    <span class="font-weight-bold"><?php echo $cliente->usuario ?></span>
-                    <span class="text-black-50"><?php echo $cliente->email ?></span>
-                    <span></span>
-                </div>
-            </div>
-            
             <div class="col-md-5 border-right">
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Perfil</h4>
+                            <h4 class="text-right">Quejas y sugerencias</h4>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <label class="labels">Nombre</label>
-                                <input type="text" class="form-control" placeholder="Nombre" name="Nombre" value="<?php echo $cliente->nombreCompleto ?>">
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label class="labels">Usuario</label>
-                                <input type="text" class="form-control" placeholder="Usuario" name="Usuario" value="<?php echo $cliente->usuario ?>">
-                            </div>
-                            <div class="col-md-12">
-                                <label class="labels">Teléfono</label>
-                                <input type="text" class="form-control" placeholder="Teléfono" name="Telefono" value="<?php echo $cliente->telefono ?>">
+                        <div>
+                            <div>
+                                <label class="labels">Queja o sugerencia</label>
+                                <textarea class="form-control" placeholder="" name="Queja" value="" rows="5" cols="100"></textarea>
                             </div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <label class="labels">Dirección</label>
-                                <input type="text" class="form-control" placeholder="Dirección" name="Direccion" value="<?php echo $cliente->direccion ?>">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="labels">Localidad</label>
-                                <input type="text" class="form-control" placeholder="Localidad" name="Localidad" value="<?php echo $cliente->localidad ?>">
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar perfil</button></div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Enviar">Realizar queja/sugerencia</button></div>
                     </div>
                 </div>
             </form>

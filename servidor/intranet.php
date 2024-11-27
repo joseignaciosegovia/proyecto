@@ -149,7 +149,35 @@
                 <?php
             breaK;
         case 'Servicio Técnico':
-            echo "Departamento de servicio técnico";
+            echo "<h3>Departamento de servicio técnico</h3>";
+            echo "<h4>Quejas y sugerencias de clientes</h4>";
+            $crud = new Crud("userTienda", "1234");
+            $clientes = $crud->listarDatos("clientes");
+                ?>
+                <?php 
+                    foreach($clientes as $cliente){ 
+                        // Si el usuario tiene quejas, las mostramos en una tabla
+                        if($cliente->quejas != null){
+                            echo "<h5>Usuario $cliente->nombreCompleto</h5>";
+                ?>
+                            <table>
+                                <thead>
+                                    <th>Descripción</th>
+                                    <th>Fecha</th>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    foreach($cliente->quejas as $queja){
+                                ?>
+                                <tr>
+                                    <td><?php echo $queja->descripcion ?></td>
+                                    <td><?php echo $queja->fecha ?></td>
+                                </tr>
+                                    <?php } ?>
+                            </tbody>
+                        </table>
+                    <?php }} ?>
+                <?php
             breaK;
     }
 ?>
