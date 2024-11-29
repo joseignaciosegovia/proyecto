@@ -6,6 +6,12 @@
         require "../clases/" . $class . ".php";
     });
 
+    function error($mensaje) {
+        $_SESSION['error'] = $mensaje;
+        header('Location:perfil.php');
+        die();
+    }
+
     $crud = new Crud();
 
     // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
@@ -16,6 +22,11 @@
 
     // Si pulsamos el botón de actualizar perfil
     if (isset($_POST['Actualizar'])) {
+        // Si se ha cambiado el nombre de usuario y coincide con uno ya existente
+        if($_SESSION["cliente"] != $_POST['Usuario'] && $crud->obtenerDatos("clientes", ["usuario" => $_POST['Usuario']], [])){
+            error("Error, El nombre de usuario ya existe.");
+        }
+
         $cliente = [
             "nombreCompleto" => $_POST['Nombre'],
             "usuario" => $_POST['Usuario'],
@@ -137,6 +148,15 @@
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar perfil</button></div>
                     </div>
                 </div>
+                <?php
+                    // Si hay algún error lo mostramos aquí
+                    if (isset($_SESSION['error'])) {
+                        echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
+                        echo "</div>";
+                    }
+                ?>
             </form>
         </div>
         <div id="seccionEntrega">
@@ -173,6 +193,7 @@
                 <a>© Copyright 2024, Electrónica Online</a>
             </div>
         </footer>
-        <script src="../js/main.js"></script>
+        <script src="../js/perfilYQuejas.js"></script>
+        
     </body>
 </html>

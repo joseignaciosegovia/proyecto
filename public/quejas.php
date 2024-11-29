@@ -137,6 +137,6 @@
                 <a>© Copyright 2024, Electrónica Online</a>
             </div>
         </footer>
-        <script src="../js/main.js"></script>
+        <script src="../js/perfilYQuejas.js"></script>
     </body>
 </html>

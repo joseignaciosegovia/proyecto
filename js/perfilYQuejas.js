@@ -10,22 +10,6 @@ let ofertas = document.querySelector('#ofertas');
 let ordenadores = document.querySelector('#ordenadores');
 let componentes = document.querySelector('#componentes');
 
-// Botón "Novedades"
-const nov_btn = document.querySelectorAll(".btn-group button")[0];
-nov_btn.addEventListener("click", cargarNovedades);
-
-// Botón "Ofertas"
-const ofe_btn = document.querySelectorAll(".btn-group button")[1];
-ofe_btn.addEventListener("click", cargarOfertas);
-
-// Botón "Ordenadores"
-const ord_btn = document.querySelectorAll(".btn-group button")[2];
-ord_btn.addEventListener("click", cargarOrdenadores);
-
-// Botón "Componentes"
-const com_btn = document.querySelectorAll(".btn-group button")[3];
-com_btn.addEventListener("click", cargarComponentes);
-
 // Botón para comprar
 const buy_btn = document.querySelector(".btn-buy");
 buy_btn.addEventListener("click", handle_buyOrden);
@@ -54,16 +38,16 @@ usuario.addEventListener("click", () => {
 
     // Comprobamos si hay un usuario logeado
 
-    fetch('public/devolverCliente.php', {
+    fetch('devolverCliente.php', {
         method: 'get'
       }).then ((response) => response.json()
       ).then(function (data) {
         if(data){
             seccionUsuario.replaceChildren();
-            seccionUsuario.insertAdjacentHTML('beforeend', `</br></br><a href="public/perfil.php">Perfil</a></br>
+            seccionUsuario.insertAdjacentHTML('beforeend', `</br></br><a href="perfil.php">Perfil</a></br>
                 <a>Historial de compras</a></br>
                 <a>Lista de deseos</a></br>
-                <a href="public/Quejas.php">Quejas y sugerencias</a></br>
+                <a href="Quejas.php">Quejas y sugerencias</a></br>
                 <i class="bi bi-x-circle" id="cerrarUsuario"></i>`);
         }
             seccionUsuario.style.display = "block";
@@ -88,8 +72,6 @@ window.addEventListener('load', function() {
     cesta.style.display = "none";
     seccionUsuario.style.display = "none";
     addEvents();
-
-    cargarNovedades();
 });
 
 function update() {
@@ -246,132 +228,4 @@ function cartBoxComponent(title, price, imgSrc) {
     <!-- ELIMINAR CART -->
     <i class="bx bxs-trash-alt cart-remove"></i>
     `;
-}
-
-// Cargamos las novedades
-function cargarNovedades() {
-    // Ocultamos el resto de secciones y mostramos la sección de novedades
-    ofertas.style.display = "none";
-    ordenadores.style.display = "none";
-    componentes.style.display = "none";
-    novedades.style.display = "block";
-    
-    novedades.replaceChildren();
-    novedades.insertAdjacentHTML('beforeend', `<h2>Novedades</h2>`);
-
-    const formData = new FormData();
-    formData.append("data", "novedades");
-
-    fetch('servidor/mostrarProductos.php', {
-        method: 'post',
-        body: formData
-      }).then ((response) => response.json()
-      ).then(function (datos) {
-        mostrarProductos(novedades, datos);
-      }).catch(function (err) {
-        console.log("Ha habido un error");
-      });
-}
-
-// Cargamos las ofertas
-function cargarOfertas() {
-    // Ocultamos el resto de secciones y mostramos la sección de ofertas
-    ofertas.style.display = "block";
-    ordenadores.style.display = "none";
-    componentes.style.display = "none";
-    novedades.style.display = "none";
-
-    ofertas.replaceChildren();
-    ofertas.insertAdjacentHTML('beforeend', `<h2>Ofertas</h2>`);
-
-    const formData = new FormData();
-    formData.append("data", "ofertas");
-
-    fetch('servidor/mostrarProductos.php', {
-        method: 'post',
-        body: formData
-      }).then ((response) => response.json()
-      ).then(function (datos) {
-        mostrarProductos(ofertas, datos);
-      }).catch(function (err) {
-        console.log("Ha habido un error");
-      });
-}
-
-// Cargamos los ordenadores
-function cargarOrdenadores() {
-    // Ocultamos el resto de secciones y mostramos la sección de ordenadores
-    ofertas.style.display = "none";
-    ordenadores.style.display = "block";
-    componentes.style.display = "none";
-    novedades.style.display = "none";
-    
-    ordenadores.replaceChildren();
-    ordenadores.insertAdjacentHTML('beforeend', `<h2>Ordenadores</h2>`);
-
-    const formData = new FormData();
-    formData.append("data", "ordenadores");
-
-    fetch('servidor/mostrarProductos.php', {
-        method: 'post',
-        body: formData
-      }).then ((response) => response.json()
-      ).then(function (datos) {
-        mostrarProductos(ordenadores, datos);
-      }).catch(function (err) {
-        console.log("Ha habido un error");
-      });
-}
-
-// Cargamos los componentes
-function cargarComponentes() {
-    // Ocultamos el resto de secciones y mostramos la sección de novedades
-    ofertas.style.display = "none";
-    ordenadores.style.display = "none";
-    componentes.style.display = "block";
-    novedades.style.display = "none";
-
-    componentes.replaceChildren();
-    componentes.insertAdjacentHTML('beforeend', `<h2>Componentes</h2>`);
-
-    const formData = new FormData();
-    formData.append("data", "componentes");
-
-    fetch('servidor/mostrarProductos.php', {
-        method: 'post',
-        body: formData
-      }).then ((response) => response.json()
-      ).then(function (datos) {
-        mostrarProductos(componentes, datos);
-      }).catch(function (err) {
-        console.log("Ha habido un error");
-      });
-}
-
-function mostrarProductos(productos, datos) {
-    productos.insertAdjacentHTML('beforeend', `<div class="divProductos"></div>`);
-    let divProductos = productos.childNodes[1];
-    divProductos.replaceChildren();
-    for(let i = 0; i < 6 && i < datos.length; i++) {
-        divProductos.insertAdjacentHTML('beforeend', `<div class="productos">
-            <p>${datos[i]['nombre']}</p>
-            <p>${datos[i]['precio']}</p>
-            <img class="imagenProducto" src="img/${datos[i]['imagen']}"></img>
-        </div>`);
-    }
-}
-
-function invocarNode() {
-    fetch('/Aplicacion/nodejs/servidor.js', {
-        method: 'post'
-    }).then((response) => response.text())
-    .then(function(data) {
-    
-        //console.log("Datos recibidos: ", data);
-    
-    }).catch(function(data) {
-    
-        console.log("Error");
-    
-    });
 }

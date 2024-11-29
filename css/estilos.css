@@ -54,17 +54,35 @@ h1 {
     transition: 1.7s;
 }
 
-/* Secciones de Novedades, Ofertas, Ordenadores y Componentes */
-.divNovedades, .divOfertas, .divOrdenadores, .divComponentes {
-    display: flex;
+/* Secciones que incluyen los productos que se muestran en Novedades, Ofertas, Ordenadores y Componentes */
+.divProductos {
+    /* display: flex;*/
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+    gap: 1.5rem;
+    text-align: center;
 }
 
 /* Productos de la sección de Novedades, Ofertas, Ordenadores y Componentes */
-.productoNovedad, .productoOferta, .productoOrdenador, .productoComponente {
+.productos {
+    position: relative;
+    transition: .5s ease-in-out;
     border: 1px solid red;
 }
 
+.productos:hover{
+    padding: 10px;
+    border: 2px solid var(--sec-color);
+}
 
+/* Imágenes de los productos */
+.imagenProducto{
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    margin-bottom: .5rem;
+}
 
 .cart.active{
     right: 0;
