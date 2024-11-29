@@ -54,13 +54,17 @@ h1 {
     transition: 1.7s;
 }
 
-.divNovedades {
+/* Secciones de Novedades, Ofertas, Ordenadores y Componentes */
+.divNovedades, .divOfertas, .divOrdenadores, .divComponentes {
     display: flex;
 }
 
-.productoNovedad {
+/* Productos de la sección de Novedades, Ofertas, Ordenadores y Componentes */
+.productoNovedad, .productoOferta, .productoOrdenador, .productoComponente {
     border: 1px solid red;
 }
+
+
 
 .cart.active{
     right: 0;

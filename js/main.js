@@ -254,7 +254,8 @@ function cargarNovedades() {
     ofertas.style.display = "none";
     ordenadores.style.display = "none";
     componentes.style.display = "none";
-    //novedades.style.display = "block";
+    novedades.style.display = "block";
+    
     novedades.replaceChildren();
     novedades.insertAdjacentHTML('beforeend', `<h2>Novedades</h2>`);
 

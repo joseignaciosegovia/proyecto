@@ -1,7 +1,10 @@
 <?php
     session_start();
 
-    require_once __DIR__ . "/../clases/Crud.php";
+    //Hacemos el autoload de las clases
+    spl_autoload_register(function ($class) {
+        require "../clases/" . $class . ".php";
+    });
 
     $crud = new Crud();
 

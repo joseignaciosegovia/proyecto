@@ -1,5 +1,11 @@
 <?php
     session_start();
+
+    //Hacemos el autoload de las clases
+    spl_autoload_register(function ($clase) {
+        require "../clases/" . $clase . ".php";
+    });
+
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location:registroUsuario.php');
@@ -24,14 +30,6 @@
     </head>
     <body>
     <?php
-        /*spl_autoload_register(function ($class) {
-            require "/../clases/" . $class . ".php";
-        });*/
-
-        require_once __DIR__ . "/../clases/Cliente.php";
-        require_once __DIR__ . "/../clases/Conexion.inc.php";
-        require_once __DIR__ . "/../clases/Crud.php";
-
         function nombreNoVacio(&$nombre) {
             // Comprobamos que el nombre no esté vacío
             if (strlen($nombre) == 0) {
@@ -104,52 +102,51 @@
             header('Location:../index.html');
         } else {
     ?>
-        <form name="crear" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="nom">Nombre Completo</label>
-                    <input type="text" class="form-control" id="nom" placeholder="Nombre Completo" name="nombre" required>
+        <div class="container mt-5">
+            <div class="d-flex justify-content-center h-100">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Crear Usuario</h3>
+                        <h4>¿Tienes cuenta? <a href="accesoUsuario.php">Inicia sesión aquí</a></h4>
+                    </div>
+                    <div class="card-body">
+                        <form name="crear" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                            <div class="mb-3">
+                                <label for="nom">Nombre Completo</label>
+                                <input type="text" class="form-control" id="nom" placeholder="Nombre Completo" name="nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="usu">Nombre de usuario</label>
+                                <input type="text" class="form-control" id="usu" placeholder="Nombre de usuario" name="usuario" required>
+                            <div class="mb-3">
+                                <label for="con">Contraseña</label>
+                                <input type="password" class="form-control" id="con" placeholder="Contraseña" name="contraseña" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dir">Dirección</label>
+                                <input type="text" class="form-control" id="dir" placeholder="Dirección" name="direccion" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ciu">Localidad</label>
+                                <input type="text" class="form-control" id="ciu" placeholder="Localidad" name="localidad" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ema">Email</label>
+                                <input type="email" class="form-control" id="ema" placeholder="Email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tel">Teléfono</label>
+                                <input type="tel" class="form-control" id="tel" placeholder="Teléfono" name="telefono" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary mr-3" name="enviar">Crear</button>
+                                <input type="reset" value="Limpiar" class="btn btn-success mr-3">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="usu">Nombre de usuario</label>
-                    <input type="text" class="form-control" id="usu" placeholder="Nombre de usuario" name="usuario" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="con">Contraseña</label>
-                    <input type="password" class="form-control" id="con" placeholder="Contraseña" name="contraseña" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="dir">Dirección</label>
-                    <input type="text" class="form-control" id="dir" placeholder="Dirección" name="direccion" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="ciu">Localidad</label>
-                    <input type="text" class="form-control" id="ciu" placeholder="Localidad" name="localidad" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="ema">Email</label>
-                    <input type="email" class="form-control" id="ema" placeholder="Email" name="email" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="tel">Teléfono</label>
-                    <input type="tel" class="form-control" id="tel" placeholder="Teléfono" name="telefono" required>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary mr-3" name="enviar">Crear</button>
-            <input type="reset" value="Limpiar" class="btn btn-success mr-3">
-        </form>
+        </div>
         <?php
             if (isset($_SESSION['error'])) {
                 echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";

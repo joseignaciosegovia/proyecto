@@ -1,13 +1,10 @@
 <?php
     session_start();
 
-    require_once __DIR__ . "/../clases/Trabajador.php";
-    require_once __DIR__ . "/../clases/Conexion.inc.php";
-
     //Hacemos el autoload de las clases
-    /*spl_autoload_register(function ($class) {
-        require "clases/" . $class . ".php";
-    });*/
+    spl_autoload_register(function ($class) {
+        require "../clases/" . $class . ".php";
+    });
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location:servidor.php');

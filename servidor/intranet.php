@@ -1,7 +1,10 @@
 <?php
     session_start();
 
-    require_once __DIR__ . "/../clases/Crud.php";
+    //Hacemos el autoload de las clases
+    spl_autoload_register(function ($class) {
+        require "../clases/" . $class . ".php";
+    });
 
     // Si no hemos iniciado sesión como trabajador, volvemos a la página de inicio de sesión de los trabajadores
     if (empty($_SESSION["trabajador"])) {
@@ -35,10 +38,13 @@
             echo "<h3>Departamento de compras</h3>";
             echo "<h4>Productos</h4>";
             $crud = new Crud("userTienda", "1234");
-            $productos = $crud->listarDatos("productos", [], []);
+            $opciones = ["sort" => ["stock" => 1]];
+            // Obtenemos los productos ordenados por stock
+            $productos = $crud->listarDatos("productos", [], $opciones);
                 ?>
-                <table>
+                <table class="table table-hover">
                     <thead>
+                        <th>#</th>
                         <th>Nombre</th>
                         <th>Categoría</th>
                         <th>Descripción</th>
@@ -47,24 +53,30 @@
                     </thead>
                     <tbody>
                         <?php
+                            $cont = 1;
                             foreach($productos as $producto){
                         ?>
                         <tr>
+                            <th><?php echo $cont ?></th>
                             <td><?php echo $producto->nombre ?></td>
                             <td><?php echo $producto->categoria ?></td>
                             <td><?php echo $producto->descripcion ?></td>
                             <td><?php echo $producto->precio ?></td>
                             <td><?php echo $producto->stock ?></td>
                         </tr>
-                            <?php } ?>
+                            <?php 
+                                $cont++;
+                            } 
+                            ?>
                     </tbody>
                 </table>
                 <?php
                     $proveedores = $crud->listarDatos("proveedores", [], []);
                 ?>
             <h4>Proveedores</h4>
-            <table>
+            <table class="table table-hover">
                 <thead>
+                    <th>#</th>
                     <th>Nombre</th>
                     <th>Dirección</th>
                     <th>Localidad</th>
@@ -74,9 +86,11 @@
                 </thead>
                 <tbody>
                     <?php
+                        $cont = 1;
                         foreach($proveedores as $proveedor){
                     ?>
                     <tr>
+                        <th><?php echo $cont ?></th>
                         <td><?php echo $proveedor->nombre ?></td>
                         <td><?php echo $proveedor->direccion ?></td>
                         <td><?php echo $proveedor->localidad ?></td>
@@ -89,7 +103,7 @@
                                     $producto = $crud->obtenerDatos("productos", ["_id" => $producto_id], []);
                                     echo "<option>$producto->nombre</option>";
                                 }
-                                
+                                $cont++;
                                 ?>
                             </select>
                         </td>
@@ -109,20 +123,29 @@
             $crud = new Crud("userTienda", "1234");
             $contraseñasCl = $crud->listarDatos("contraseñasCl", [], []);
                 ?>
-                <table>
+                <table class="table table-hover">
                     <thead>
+                        <th>#</th>
+                        <th>Cliente</th>
                         <th>Usuario</th>
                         <th>Hash de la contraseña</th>
                     </thead>
                     <tbody>
                         <?php
+                            $cont = 1;
                             foreach($contraseñasCl as $contraseñaCl){
+                                $cliente = $crud->obtenerDatos("clientes", ["_id" => $contraseñaCl->cliente_id], []);
                         ?>
                         <tr>
+                            <th><?php echo $cont ?></th>
+                            <td><?php echo $cliente->nombreCompleto ?></td>
                             <td><?php echo $contraseñaCl->usuario ?></td>
                             <td><?php echo $contraseñaCl->contraseña ?></td>
                         </tr>
-                            <?php } ?>
+                            <?php 
+                                $cont++;
+                            } 
+                            ?>
                     </tbody>
                 </table>
                 <?php
@@ -130,20 +153,30 @@
             echo "<h4>Trabajadores</h4>";
             $contraseñasTr = $crud->listarDatos("contraseñasTr", [], []);
                 ?>
-                <table>
+                <table class="table table-hover">
                     <thead>
+                        <th>#</th>
                         <th>Trabajador</th>
+                        <th>Usuario</th>
+                        <th>Departamento</th>
                         <th>Hash de la contraseña</th>
                     </thead>
                     <tbody>
                         <?php
+                            $cont = 1;
                             foreach($contraseñasTr as $contraseñaTr){
+                                $trabajador = $crud->obtenerDatos("trabajadores", ["_id" => $contraseñaTr->trabajador_id], []);
                         ?>
                         <tr>
+                            <th><?php echo $cont ?></th>
+                            <td><?php echo $trabajador->nombre ?></td>
                             <td><?php echo $contraseñaTr->usuario ?></td>
+                            <td><?php echo $trabajador->departamento ?></td>
                             <td><?php echo $contraseñaTr->contraseña ?></td>
                         </tr>
-                            <?php } ?>
+                            <?php 
+                                $cont++;
+                            } ?>
                     </tbody>
                 </table>
                 <?php
@@ -154,29 +187,30 @@
             $crud = new Crud("userTienda", "1234");
             $clientes = $crud->listarDatos("clientes", [], []);
                 ?>
-                <?php 
-                    foreach($clientes as $cliente){ 
-                        // Si el usuario tiene quejas, las mostramos en una tabla
-                        if($cliente->quejas != null){
-                            echo "<h5>Usuario $cliente->nombreCompleto</h5>";
-                ?>
-                            <table>
-                                <thead>
-                                    <th>Descripción</th>
-                                    <th>Fecha</th>
-                                </thead>
-                                <tbody>
-                                <?php
-                                    foreach($cliente->quejas as $queja){
-                                ?>
-                                <tr>
-                                    <td><?php echo $queja->descripcion ?></td>
-                                    <td><?php echo $queja->fecha ?></td>
-                                </tr>
-                                    <?php } ?>
-                            </tbody>
-                        </table>
-                    <?php }} ?>
+                <table class="table table-hover">
+                    <thead>
+                        <th>Nombre Usuario</th>
+                        <th>Descripción</th>
+                        <th>Fecha</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach($clientes as $cliente){ 
+                            if($cliente->quejas != null){
+                                echo "<tr>";
+                                $numeroQuejas = $cliente->quejas->count();
+                                echo "<th rowspan=$numeroQuejas>$cliente->nombreCompleto</th>";
+                                foreach($cliente->quejas as $queja){
+                                    echo "<td>$queja->descripcion</td>";
+                                    echo "<td>$queja->fecha</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tr>";
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
                 <?php
             breaK;
     }
