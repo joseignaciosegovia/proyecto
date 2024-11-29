@@ -354,9 +354,10 @@ function mostrarProductos(productos, datos) {
     divProductos.replaceChildren();
     for(let i = 0; i < 6 && i < datos.length; i++) {
         divProductos.insertAdjacentHTML('beforeend', `<div class="productos">
-            <p>${datos[i]['nombre']}</p>
-            <p>${datos[i]['precio']}</p>
             <img class="imagenProducto" src="img/${datos[i]['imagen']}"></img>
+            <a href="productos/productos.php?producto=${datos[i]['nombre']}"><p>${datos[i]['nombre']}</p></a>
+            <p>${datos[i]['precio']}</p>
+            <i class="bi bi-bag-dash-fill"></i>
         </div>`);
     }
 }
