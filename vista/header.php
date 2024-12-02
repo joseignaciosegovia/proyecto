@@ -12,12 +12,12 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
         <!-- Animanate CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-        <link rel="stylesheet" type="text/css" href="./css/estilos.css">
+        <link rel="stylesheet" type="text/css" href="http://localhost/Aplicacion/css/estilos.css">
     </head>
     <body>
         <header>
             <div id="cabecera">
-                <h1><a href="index.html">ELECTRÓNICA ONLINE</a></h1>
+                <h1><a href="http://localhost/Aplicacion/index.php">ELECTRÓNICA ONLINE</a></h1>
                 <div id="iconosCabecera">
                     <a><i class="bi bi-cart-dash"></i></a>
                     <a><i class="bi bi-search"></i></a>

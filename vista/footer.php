@@ -32,6 +32,4 @@
                 <a>© Copyright 2024, Electrónica Online</a>
             </div>
         </footer>
-        <script src="./js/main.js"></script>
-    </body>
-</html>
+        
