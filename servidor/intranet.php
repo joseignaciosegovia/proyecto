@@ -23,7 +23,7 @@
             <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
             <!-- Animanate CSS -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-            <link rel="stylesheet" type="text/css" href="./css/estilos.css">
+            <link rel="stylesheet" type="text/css" href="../css/estilos.css">
         </head>
         <body>
             <header>
@@ -164,13 +164,13 @@
                         <?php
                             $cont = 1;
                             foreach($contraseñasTr as $contraseñaTr){
-                                $trabajador = $crud->obtenerDatos("trabajadores", ["_id" => $contraseñaTr->trabajador_id], []);
+                                $usuario = $crud->obtenerDatos("trabajadores", ["_id" => $contraseñaTr->trabajador_id], []);
                         ?>
                         <tr>
                             <th><?php echo $cont ?></th>
-                            <td><?php echo $trabajador->nombre ?></td>
+                            <td><?php echo $usuario->nombre ?></td>
                             <td><?php echo $contraseñaTr->usuario ?></td>
-                            <td><?php echo $trabajador->departamento ?></td>
+                            <td><?php echo $usuario->departamento ?></td>
                             <td><?php echo $contraseñaTr->contraseña ?></td>
                         </tr>
                             <?php 
@@ -194,8 +194,10 @@
                     </thead>
                     <tbody>
                         <?php
-                        foreach($clientes as $cliente){ 
-                            if($cliente->quejas != null){
+                        // Recorremos cada cliente
+                        foreach($clientes as $cliente){
+                            // Si el cliente tiene alguna queja la mostramos
+                            if($cliente->quejas->count() != 0){
                                 echo "<tr>";
                                 $numeroQuejas = $cliente->quejas->count();
                                 echo "<th rowspan=$numeroQuejas>$cliente->nombreCompleto</th>";

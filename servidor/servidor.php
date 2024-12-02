@@ -1,6 +1,6 @@
 <?php
 
-    require_once "../modelo/Trabajador.php";
+    require_once "../controlador/Crud.php";
 
     session_start();
 
@@ -34,13 +34,14 @@
                 }
 
                 // Comprobamos si existe un trabajador con el usuario y la contraseña introducidos
-                $trabajador = Trabajador::isValido($nombre, $contraseña);
+                $crud = new Crud();
+                $usuario = $crud->isValido("trabajadores", $nombre, $contraseña);
                 // Si no existe, mostramos el error y actualizamos la página
-                if ($trabajador == null) {
+                if ($usuario == null) {
                     error("Credenciales Inválidas");
                 }
                 $_SESSION['trabajador'] = $nombre;
-                $_SESSION['departamento'] = $trabajador->departamento;
+                $_SESSION['departamento'] = $usuario->departamento;
 
                 // MOSTRAR UN MENSAJE DE LOGEO CORRECTO Y QUE EL USUARIO PUEDA ACCEDER A SU INFORMACIÓN
 

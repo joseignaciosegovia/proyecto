@@ -1,7 +1,6 @@
 <?php
     session_start();
 
-    require_once "../modelo/Cliente.php";
     require_once "../controlador/Crud.php";
 
     function error($mensaje) {
@@ -49,29 +48,22 @@
             // Recogemos los datos del formulario
             // Trimamos las cadenas
             $nombre = trim($_POST['nombre']);
-            $trabajador = trim($_POST['usuario']);
-            $contraseña = trim($_POST['contraseña']);
-            $localidad = $_POST['localidad'];
-            $direccion = $_POST['direccion'];
-            $email = $_POST['email'];
-            $telefono = $_POST['telefono'];
+            $usuario = trim($_POST['usuario']);
 
             nombreNoVacio($nombre);
 
-            $respuesta = $crud->obtenerDatos("clientes", ["usuario" => $trabajador], ["usuario" => true]);
+            $respuesta = $crud->obtenerDatos("clientes", ["usuario" => $usuario], ["usuario" => true]);
             if($respuesta != null) {
                 error("El usuario está repetido");
             }
-            
-            $cliente = new Cliente($trabajador, $contraseña, $nombre, $localidad, $direccion, $email, $telefono);
 
             $arrayCliente = [
-                "usuario" => $cliente->usuario,
-                "nombreCompleto" => $cliente->nombreCompleto,
-                "localidad" => $cliente->localidad,
-                "direccion" => $cliente->direccion,
-                "email" => $cliente->email,
-                "telefono" => $cliente->telefono,
+                "usuario" => $usuario,
+                "nombreCompleto" => $nombre,
+                "localidad" => $_POST['localidad'],
+                "direccion" => $_POST['direccion'],
+                "email" => $_POST['email'],
+                "telefono" => $_POST['telefono'],
                 "compras" => [],
                 "deseos" => [],
                 "quejas" => [],
@@ -82,8 +74,8 @@
 
             $arrayContraseñaCliente = [
                 "cliente_id" => $arrayCliente['_id'],
-                "usuario" => $cliente->usuario,
-                "contraseña" => password_hash($cliente->contraseña, PASSWORD_DEFAULT)
+                "usuario" => $arrayCliente['usuario'],
+                "contraseña" => password_hash($_POST['contraseña'], PASSWORD_DEFAULT)
             ];
 
             $crud->añadirDatos("contraseñasCl", $arrayContraseñaCliente, []);

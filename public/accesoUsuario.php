@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-require_once "../modelo/Trabajador.php";
-require_once "../modelo/Cliente.php";
+require_once "../controlador/Crud.php";
 
 function error($mensaje) {
     $_SESSION['error'] = $mensaje;
@@ -35,7 +34,8 @@ function error($mensaje) {
             }
 
             // Comprobamos si existe un cliente con el usuario y la contraseña introducidos
-            $cliente = Cliente::isValido($nombre, $contraseña);
+            $crud = new Crud();
+            $cliente = $crud->isValido("clientes", $nombre, $contraseña);
             // Si no existe, mostramos el error y actualizamos la página
             if ($cliente == null) {
                 error("Credenciales Inválidas");
