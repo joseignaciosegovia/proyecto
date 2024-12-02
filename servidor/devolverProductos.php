@@ -1,9 +1,6 @@
 <?php
 
-    //Hacemos el autoload de las clases
-    spl_autoload_register(function ($class) {
-        require "../clases/" . $class . ".php";
-    });
+    require_once "../controlador/Crud.php";
 
     $crud = new Crud();
     // Guardamos la opción seleccionada

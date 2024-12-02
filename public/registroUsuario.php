@@ -1,10 +1,8 @@
 <?php
     session_start();
 
-    //Hacemos el autoload de las clases
-    spl_autoload_register(function ($clase) {
-        require "../clases/" . $clase . ".php";
-    });
+    require_once "../modelo/Cliente.php";
+    require_once "../controlador/Crud.php";
 
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
@@ -99,7 +97,7 @@
             
             $_SESSION['mensaje'] = 'Cliente creado Correctamente';
 
-            header('Location:../index.html');
+            header('Location:../index.php');
         } else {
     ?>
         <div class="container mt-5">

@@ -17,7 +17,7 @@
     <body>
         <header>
             <div id="cabecera">
-                <h1><a href="../index.html">ELECTRÓNICA ONLINE</a></h1>
+                <h1><a href="../index.php">ELECTRÓNICA ONLINE</a></h1>
                 <div id="iconosCabecera">
                     <a><i class="bi bi-cart-dash"></i></a>
                     <a><i class="bi bi-search"></i></a>
@@ -53,10 +53,7 @@
             <div class="product-box">
                 <div class="product-info">
                     <?php
-                        //Hacemos el autoload de las clases
-                        spl_autoload_register(function ($class) {
-                            require "../clases/" . $class . ".php";
-                        });
+                        require_once __DIR__ . "/../controlador/Crud.php";
 
                         $crud = new Crud();
                         $producto = $crud->obtenerDatos("productos", ["nombre" => $_GET['producto']], []);

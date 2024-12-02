@@ -1,10 +1,7 @@
 <?php
     session_start();
 
-    //Hacemos el autoload de las clases
-    spl_autoload_register(function ($class) {
-        require "../clases/" . $class . ".php";
-    });
+    require_once "../controlador/Crud.php";
 
     $nombreCliente = $_SESSION['cliente'];
 

@@ -1,16 +1,13 @@
 <?php
     session_start();
 
-    //Hacemos el autoload de las clases
-    spl_autoload_register(function ($class) {
-        require "../clases/" . $class . ".php";
-    });
+    require_once "../controlador/Crud.php";
 
     $crud = new Crud();
 
     // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
     if (empty($_SESSION["cliente"])) {
-        header("Location: ../index.html");
+        header("Location: ../index.php");
         exit();
     }
 
@@ -52,7 +49,7 @@
     <body>
         <header>
             <div id="cabecera">
-                <h1><a href="../index.html">ELECTRÓNICA ONLINE</a></h1>
+                <h1><a href="../index.php">ELECTRÓNICA ONLINE</a></h1>
                 <div id="iconosCabecera">
                     <a><i class="bi bi-cart-dash"></i></a>
                     <a><i class="bi bi-search"></i></a>

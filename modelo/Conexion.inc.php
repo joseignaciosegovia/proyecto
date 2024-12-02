@@ -1,5 +1,5 @@
 <?php 
-    require __DIR__ . '/../vendor/autoload.php';
+    require '../vendor/autoload.php';
 
     class Conexion {
         public static function conectar($usuario = "mongoadmin", $contraseña = "123456"){

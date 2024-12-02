@@ -1,10 +1,8 @@
 <?php
 session_start();
 
-//Hacemos el autoload de las clases
-spl_autoload_register(function ($class) {
-    require "../clases/" . $class . ".php";
-});
+require_once "../modelo/Trabajador.php";
+require_once "../modelo/Cliente.php";
 
 function error($mensaje) {
     $_SESSION['error'] = $mensaje;
@@ -47,7 +45,7 @@ function error($mensaje) {
 
             // MOSTRAR UN MENSAJE DE LOGEO CORRECTO Y QUE EL USUARIO PUEDA ACCEDER A SU INFORMACIÓN
 
-            header('Location:../index.html');
+            header('Location:../index.php');
         } else {
             ?>
             <div class="container mt-5">

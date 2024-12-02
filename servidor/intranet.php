@@ -1,10 +1,7 @@
 <?php
     session_start();
 
-    //Hacemos el autoload de las clases
-    spl_autoload_register(function ($class) {
-        require "../clases/" . $class . ".php";
-    });
+    require_once "../controlador/Crud.php";
 
     // Si no hemos iniciado sesión como trabajador, volvemos a la página de inicio de sesión de los trabajadores
     if (empty($_SESSION["trabajador"])) {
@@ -48,7 +45,8 @@
                         <th>Nombre</th>
                         <th>Categoría</th>
                         <th>Descripción</th>
-                        <th>Precio</th>
+                        <th>Precio actual</th>
+                        <th>Precio original</th>
                         <th>Stock</th>
                     </thead>
                     <tbody>
@@ -61,7 +59,8 @@
                             <td><?php echo $producto->nombre ?></td>
                             <td><?php echo $producto->categoria ?></td>
                             <td><?php echo $producto->descripcion ?></td>
-                            <td><?php echo $producto->precio ?></td>
+                            <td><?php echo $producto->precio_actual ?></td>
+                            <td><?php echo $producto->precio_original ?></td>
                             <td><?php echo $producto->stock ?></td>
                         </tr>
                             <?php 

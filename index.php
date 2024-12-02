@@ -17,7 +17,7 @@
     <body>
         <header>
             <div id="cabecera">
-                <h1><a href="index.html">ELECTRÓNICA ONLINE</a></h1>
+                <h1><a href="index.php">ELECTRÓNICA ONLINE</a></h1>
                 <div id="iconosCabecera">
                     <a><i class="bi bi-cart-dash"></i></a>
                     <a><i class="bi bi-search"></i></a>

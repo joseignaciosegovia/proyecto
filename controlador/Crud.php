@@ -1,5 +1,5 @@
 <?php 
-    require_once "Conexion.inc.php";
+    require_once "../modelo/Conexion.inc.php";
 
     class Crud extends Conexion {
         private $conexion;
