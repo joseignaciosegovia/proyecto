@@ -16,7 +16,6 @@
             $opciones = ["sort" => ["fecha" => -1]];
             break;
         case 'ofertas':
-            // ESTABLECER UN CRITERIO PARA IDENTIFICAR OFERTAS
             $consulta = [];
             $opciones = [];
             break;
@@ -31,12 +30,23 @@
             $opciones = [];
             break;
     }
+
+    $js = "function() {
+        return this->precio_actual != this->precio_original;
+    }";
     
     // Listamos los productos en función de la opción elegida
     $productos = $crud->listarDatos("productos", $consulta, $opciones);
     $enviar = [];
     foreach($productos as $producto) {
-        array_push($enviar, $producto);
+        if($seleccion == "ofertas"){
+            if($producto->precio_actual != $producto->precio_original){
+                array_push($enviar, $producto);
+            }
+        }
+        else{
+            array_push($enviar, $producto);
+        }
     }
 
     // Enviamos los productos que se mostrarán posteriormente

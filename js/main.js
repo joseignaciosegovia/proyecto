@@ -262,7 +262,7 @@ function cargarNovedades() {
     const formData = new FormData();
     formData.append("data", "novedades");
 
-    fetch('servidor/mostrarProductos.php', {
+    fetch('servidor/devolverProductos.php', {
         method: 'post',
         body: formData
       }).then ((response) => response.json()
@@ -287,7 +287,7 @@ function cargarOfertas() {
     const formData = new FormData();
     formData.append("data", "ofertas");
 
-    fetch('servidor/mostrarProductos.php', {
+    fetch('servidor/devolverProductos.php', {
         method: 'post',
         body: formData
       }).then ((response) => response.json()
@@ -312,7 +312,7 @@ function cargarOrdenadores() {
     const formData = new FormData();
     formData.append("data", "ordenadores");
 
-    fetch('servidor/mostrarProductos.php', {
+    fetch('servidor/devolverProductos.php', {
         method: 'post',
         body: formData
       }).then ((response) => response.json()
@@ -337,7 +337,7 @@ function cargarComponentes() {
     const formData = new FormData();
     formData.append("data", "componentes");
 
-    fetch('servidor/mostrarProductos.php', {
+    fetch('servidor/devolverProductos.php', {
         method: 'post',
         body: formData
       }).then ((response) => response.json()
@@ -356,9 +356,14 @@ function mostrarProductos(productos, datos) {
         divProductos.insertAdjacentHTML('beforeend', `<div class="productos">
             <img class="imagenProducto" src="img/${datos[i]['imagen']}"></img>
             <a href="productos/productos.php?producto=${datos[i]['nombre']}"><p>${datos[i]['nombre']}</p></a>
-            <p>${datos[i]['precio']}</p>
-            <i class="bi bi-bag-dash-fill"></i>
+            <p>${datos[i]['precio_actual']}€</p>
         </div>`);
+        if(datos[i]['precio_actual'] != datos[i]['precio_original']){
+            divProductos.childNodes[i].insertAdjacentHTML('beforeend', `<strike>${datos[i]['precio_original']}€</strike>
+            `);
+        }
+        divProductos.childNodes[i].insertAdjacentHTML('beforeend', `<i class="bi bi-bag-dash-fill"></i>
+        `);
     }
 }
 

@@ -65,7 +65,7 @@
                         <img src="../img/<?php echo $producto->imagen ?>" alt="" class="product-img">
                         <h2 class="product-title"><?php echo $producto->nombre ?></h2>
                         <p class="product-description"><?php echo $producto->descripcion ?></p>
-                        <span class="product-price"><?php echo $producto->precio ?></span><br>
+                        <span class="product-price"><?php echo $producto->precio_actual ?>€</span><br>
                         
                         <button class="btn btn-primary productbtn add-cart styleaddcartproduct">Añadir Al Carrito</button>
                 </div>
