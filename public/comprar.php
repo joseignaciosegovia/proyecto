@@ -13,15 +13,6 @@
     $crud = new Crud();
     $cliente = $crud->obtenerDatos("clientes", ["usuario" => $_SESSION["cliente"]], []);
     foreach($productos as $producto) {
-        $cliente->compras[] = ["nombre" => $producto['nombre'], "precio" => $producto['precio'], "fecha" => date('Y-m-d h:i:s a', time())];
+        $cliente->compras[] = ["nombre" => $producto->nombre, "precio" => $producto->precio, "fecha" => date('Y-m-d h:i:s a', time())];
         $crud->actualizarDatos("clientes", ["usuario" => $_SESSION["cliente"]], ["compras" => $cliente->compras]);
     }
-    
-    // Añadimos la nueva compra al final del array de compras
-    foreach($productos as $producto) {
-        $crud->actualizarDatos("clientes", ["usuario" => $_SESSION["cliente"]], $producto);
-    }
-    
-    //$cliente->compras[] = ["producto" => "", "precio" => ""];
-
-    
