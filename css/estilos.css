@@ -49,7 +49,8 @@ h1 {
     overflow-y: auto;
     overflow-x: hidden;
     padding: 20px;
-    background-color: #fcf3cf;
+    color: white;
+    background-color: #000814;
     box-shadow: -2px solid 4px hsl(0 4% 15% / 10%);
     border: 1px solid red;
     transition: 1.7s;
@@ -84,19 +85,43 @@ h1 {
     margin-bottom: .5rem;
 }
 
-.cart.active{
+/* Icono carrito */
+.bi-cart-dash {
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+/* Sección carrito */
+.cesta{
+    position: fixed;
+    top: 0;
+    right: 0;
+    right: -100%;
+    width: 360px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    background-color: #000814;
+    box-shadow: -2px solid 4px hsl(0 4% 15% / 10%);
+    border: 1px solid #ff002b;
+    transition: 1.7s;
+}
+
+.cesta.active{
     right: 0;
     transition: .5s;
 }
 
-.cart-title {
+/* Títulos de las secciones de cesta y usuario */
+.cesta-titulo, .usuario-titulo {
     text-align: center;
     font-size: 1.5rem;
     font-weight: 600;
     margin-top: 2rem;
 }
 
-.cart-box{
+.cesta-box{
     display:grid;
     grid-template-columns: 32% 50% 18%;
     align-items: center;
@@ -104,7 +129,7 @@ h1 {
     margin-top: 1rem;
 }
 
-.cart-img{
+.imagen-cesta{
     width: 100px;
     height: 100px;
     object-fit: contain;
@@ -116,24 +141,29 @@ h1 {
     row-gap: .5rem;
 }
 
-.cart-product-title{
+.nombre-producto-cesta{
     font-size: 1rem;
     text-transform: uppercase;
 }
 
-.cart-price{
+.precio-cesta{
     font-weight: 500;
 }
 
-.cart-quantity{
+/* Cantidad de un producto en la cesta */
+.cantidad-cesta{
     border: 1px solid #fdfffc;
     outline-color: red;
     width: 1.4rem;
     text-align: center;
     font-size: 1rem;
+    /* Hacer más ancho el input */
+    width: 3rem;
+    background-color: #000814;
+    color: #fdfffc;
 }
 
-.cart-remove{
+.eliminar-cesta{
     font-size: 24px;
     color: red;
     cursor: pointer;
@@ -146,17 +176,17 @@ h1 {
     border-top: 1px solid #fdfffc;
 }
 
-.total-title{
+.titulo-total{
     font-size: 1rem;
     font-weight: 600;
 }
 
-.total-price{
+.precio-total{
     margin-left: .5rem;
 }
 
 /* Diseño de los botones: 'Añadir productos', 'Acceso a trabajadores', 'Crear usuario', 'Registrarse', 'Cerrar sesión' */
-.btn-buy, .btn-trabajadores, .btn-usu, .btn-login, .btn-salir{
+.btn-comprar, .btn-trabajadores, .btn-usu, .btn-login, .btn-salir{
     display: flex;
     margin: 1.5rem auto 0 auto;
     padding: 12px 20px;
@@ -170,18 +200,18 @@ h1 {
 }
 
 /* Ponemos el ratón encima de los botones: 'Comprar', 'Acceso a trabajadores', 'Crear usuario', 'Registrarse', 'Cerrar sesión' */
-.btn-buy:hover, .btn-trabajadores:hover, .btn-usu:hover, .btn-login:hover, .btn-salir:hover{
+.btn-comprar:hover, .btn-trabajadores:hover, .btn-usu:hover, .btn-login:hover, .btn-salir:hover{
     background-color: red;
     color: #fdfffc;
 }
 
-/* Botón cerrar carrito */
+/* Botón cerrar carrito y cerrar cesta */
 .bi-x-circle {
     position: absolute;
     top: 1rem;
     right: .8rem;
     font-size: 2rem;
-    color: black;
+    color: white;
     cursor: pointer;
 }
 

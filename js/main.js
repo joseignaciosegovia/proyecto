@@ -1,14 +1,16 @@
 // Iconos
-let carrito = document.querySelector('.bi-cart-dash');
-let lupa = document.querySelector('.bi-search');
-let usuario = document.querySelector('.bi-person-circle');
-let cesta = document.getElementById('cesta');
-let seccionUsuario = document.getElementById('usuario');
-let cerrarCesta = document.querySelector('#cerrarCesta');
-let novedades = document.querySelector('#novedades');
-let ofertas = document.querySelector('#ofertas');
-let ordenadores = document.querySelector('#ordenadores');
-let componentes = document.querySelector('#componentes');
+const carritoIcono = document.querySelector('.bi-cart-dash');
+const cesta = document.getElementById('cesta');
+const cerrarCarrito = document.querySelector("#cart-close");
+
+const lupaIcono = document.querySelector('.bi-search');
+const usuarioIcono = document.querySelector('.bi-person-circle');
+const seccionUsuario = document.getElementById('usuario');
+const cerrarCesta = document.querySelector('#cerrarCesta');
+const novedades = document.querySelector('#novedades');
+const ofertas = document.querySelector('#ofertas');
+const ordenadores = document.querySelector('#ordenadores');
+const componentes = document.querySelector('#componentes');
 
 // Botón "Novedades"
 const nov_btn = document.querySelectorAll(".btn-group button")[0];
@@ -27,8 +29,8 @@ const com_btn = document.querySelectorAll(".btn-group button")[3];
 com_btn.addEventListener("click", cargarComponentes);
 
 // Botón para comprar
-const buy_btn = document.querySelector(".btn-buy");
-buy_btn.addEventListener("click", handle_buyOrden);
+const comprar_btn = document.querySelector(".btn-comprar");
+comprar_btn.addEventListener("click", handle_buyOrden);
 
 // Botón para el acceso de los trabajadores
 const btnTrabajadores = document.querySelector(".btn-trabajadores");
@@ -42,16 +44,16 @@ btnClientes.addEventListener("click", handle_clientes);
 const btnRegistroClientes = document.querySelector(".btn-login");
 btnRegistroClientes.addEventListener("click", handle_registroClientes);
 
-
-let itemsAdded = [];
+// Productos del carrito
+let productosCarrito = [];
 
 // Pulsamos en el icono del carrito
-carrito.addEventListener("click", () => {
+carritoIcono.addEventListener("click", () => {
     cesta.style.display = "block";
 });
 
 // Pulsamos en el icono del usuario
-usuario.addEventListener("click", () => {
+usuarioIcono.addEventListener("click", () => {
 
     // Comprobamos si hay un usuario logeado
 
@@ -94,27 +96,27 @@ seccionUsuario.addEventListener("click", () => {
 window.addEventListener('load', function() {
     cesta.style.display = "none";
     seccionUsuario.style.display = "none";
-    addEvents();
 
     cargarNovedades();
 });
 
+// Actualizar carrito
 function update() {
-    addEvents();
+    eventosCarrito();
     updateTotal();
 }
 
-function addEvents() {
+function eventosCarrito() {
 
     // Botón para eliminar artículos del carrito
-    let cartRemove_btns = document.querySelectorAll(".cart-remove");
+    let cartRemove_btns = document.querySelectorAll(".eliminar-cesta");
 
     cartRemove_btns.forEach((btn) => {
         btn.addEventListener("click", handle_removeCartItem);
     });
 
     // Botón para cambiar la cantidad de artículos del carrito
-    let cartQuantity_inputs = document.querySelectorAll(".cart-quantity");
+    let cartQuantity_inputs = document.querySelectorAll(".cantidad-cesta");
 
     cartQuantity_inputs.forEach((input) => {
         input.addEventListener("change", handle_changeItemQuantity);
@@ -128,40 +130,38 @@ function addEvents() {
     });
 }
 
+// Manejador del botón para añadir artículos al carrito
 function handle_addCartItem() {
-    let product = this.parentElement;
-    console.log(product);
-    let title = product.querySelector(".product-title").innerHTML;
-    let priceText = product.querySelector(".product-price").textContent;
+    let producto = this.parentElement;
+    let nombre = producto.querySelectorAll('p')[0].innerHTML;
+    let precioTexto = producto.querySelectorAll('p')[1].textContent;
     // Eliminar símbolos de moneda y separadores de miles
-    let price = parseFloat(priceText.replace("€", "").replace(".", "")); 
+    let precio = parseFloat(precioTexto.replace("€", "").replace(".", "")); 
 
-    let imgSrc = product.querySelector(".product-img").src;
-
-    console.log(title, price, imgSrc);
+    let rutaImagen = producto.querySelector('img').src;
     
-    let newToAdd = {
-        title,
-        price,
-        imgSrc
+    let productoAñadir = {
+        nombre: nombre,
+        precio: precio,
+        rutaImagen: rutaImagen
     };
     
-    if(itemsAdded.find((el) => el.title === newToAdd.title)){
+    if(productosCarrito.find((productoExistente) => productoExistente.nombre === productoAñadir.nombre)){
         alert("Este Articulo Ya Existe");
     } else {
-        itemsAdded.push(newToAdd);
+        productosCarrito.push(productoAñadir);
     }
     
     // Añadir productos al carrito
 
-    let carBoxElement = cartBoxComponent(title, price, imgSrc);
-    let newNode = document.createElement("div");
-    newNode.innerHTML = carBoxElement;
-    const cartContent = cart.querySelector(".cart-content");
-    cartContent.appendChild(newNode);
+    let carBoxElemento = cartBoxComponent(nombre, precio, rutaImagen);
+    let nuevoNodo = document.createElement("div");
+    nuevoNodo.innerHTML = carBoxElemento;
+    const cartContenido = cesta.querySelector(".cart-content");
+    cartContenido.appendChild(nuevoNodo);
 
     // Activar el icono del carrito
-    cart.classList.add("active");
+    cesta.style.display = "block";
 
     update()
 };
@@ -169,8 +169,8 @@ function handle_addCartItem() {
 function handle_removeCartItem() {
     this.parentElement.remove();
 
-    itemsAdded = itemsAdded.filter(
-        (el) => el.title !== this.parentElement.querySelector(".cart-product-title").innerHTML
+    productosCarrito = productosCarrito.filter(
+        (el) => el.title !== this.parentElement.querySelector(".nombre-producto-cesta").innerHTML
     );    
     update();
 }
@@ -188,17 +188,15 @@ function handle_changeItemQuantity(){
 
 function handle_buyOrden() {
 
-    invocarNode();
-
     // Si se intenta comprar hacer de hacer un pedido
-    if(itemsAdded.length <= 0){
+    if(productosCarrito.length <= 0){
         alert("No tiene ningún producto en la cesta");
         return;
     }
-    const cartContent = cart.querySelector(".cart-content");
+    const cartContent = cesta.querySelector(".cart-content");
     cartContent.innerHTML = "";
     alert("Su pedido se realizó exitosamente")
-    itemsAdded = [];
+    productosCarrito = [];
     update();
     
 }
@@ -239,40 +237,40 @@ function handle_cerrarClientes() {
 
 // Actualizar y renderizar
 function updateTotal() {
-    let cartBoxes = document.querySelectorAll('.cart-box');
-    const totalElement = cart.querySelector(".total-price");
+    let cartBoxes = document.querySelectorAll('.cesta-box');
+    const totalElement = cesta.querySelector(".precio-total");
     let total=0;
 
     cartBoxes.forEach((cartBox) => {
-        let priceElement  = cartBox.querySelector(".cart-price");
-        let price = parseFloat(priceElement.innerHTML.replace("$", ""));
-        let quantity = cartBox.querySelector(".cart-quantity").value;
+        let precioElemento  = cartBox.querySelector(".precio-cesta");
+        let precio = parseFloat(precioElemento.innerHTML.replace("€", ""));
+        let cantidad = cartBox.querySelector(".cantidad-cesta").value;
 
-        total += price * quantity;
+        total += precio * cantidad;
     });
 
     total = total.toFixed(2);
 
-    totalElement.innerHTML = "$" + total;
+    totalElement.innerHTML = total + "€";
 }
 
-function cartBoxComponent(title, price, imgSrc) {
+function cartBoxComponent(nombre, precio, rutaImagen) {
     return `
-    <div class="cart-box">
-        <img src="${imgSrc}" alt="" class="cart-img">
+    <div class="cesta-box">
+        <img src="${rutaImagen}" alt="" class="imagen-cesta">
         <div class="detail-box">
-        <div class="cart-product-title">${title}</div>
-        <div class="cart-price">$${price}</div>
-        <input type="number" value="1" class="cart-quantity">
+        <div class="nombre-producto-cesta">${nombre}</div>
+        <div class="precio-cesta">${precio}€</div>
+        <input type="number" value="1" class="cantidad-cesta">
     </div>
 
     <!-- ELIMINAR CART -->
-    <i class="bx bxs-trash-alt cart-remove"></i>
+    <i class="bi bi-trash-fill eliminar-cesta"></i>
     `;
 }
 
 // Cargamos las novedades
-function cargarNovedades() {
+async function cargarNovedades() {
     // Ocultamos el resto de secciones y mostramos la sección de novedades
     ofertas.style.display = "none";
     ordenadores.style.display = "none";
@@ -285,15 +283,18 @@ function cargarNovedades() {
     const formData = new FormData();
     formData.append("data", "novedades");
 
-    fetch('servidor/devolverProductos.php', {
-        method: 'post',
-        body: formData
-      }).then ((response) => response.json()
-      ).then(function (datos) {
+    try {
+        const respuesta = await fetch('servidor/devolverProductos.php', {
+            method: 'post',
+            body: formData
+          });
+        const datos = await respuesta.json();
         mostrarProductos(novedades, datos);
-      }).catch(function (err) {
-        console.log("Ha habido un error");
-      });
+    } catch(error) {
+        console.log("Error: " + error);
+    }
+
+    eventosCarrito();
 }
 
 // Cargamos las ofertas
@@ -385,22 +386,7 @@ function mostrarProductos(productos, datos) {
             divProductos.childNodes[i].insertAdjacentHTML('beforeend', `<strike>${datos[i]['precio_original']}€</strike>
             `);
         }
-        divProductos.childNodes[i].insertAdjacentHTML('beforeend', `<i class="bi bi-bag-dash-fill"></i>
+        divProductos.childNodes[i].insertAdjacentHTML('beforeend', `<i class="bi bi-bag-dash-fill add-cart"></i>
         `);
     }
-}
-
-function invocarNode() {
-    fetch('/Aplicacion/nodejs/servidor.js', {
-        method: 'post'
-    }).then((response) => response.text())
-    .then(function(data) {
-    
-        //console.log("Datos recibidos: ", data);
-    
-    }).catch(function(data) {
-    
-        console.log("Error");
-    
-    });
 }
