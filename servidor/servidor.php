@@ -9,6 +9,12 @@
         header('Location:servidor.php');
         die();
     }
+
+    // Si hemos iniciado sesión como trabajador, redirigimos a la intranet
+    if (!empty($_SESSION["trabajador"])) {
+        header("Location: intranet.php");
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">

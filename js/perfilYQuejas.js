@@ -48,9 +48,14 @@ usuario.addEventListener("click", () => {
                 <a>Historial de compras</a></br>
                 <a>Lista de deseos</a></br>
                 <a href="quejas.php">Quejas y sugerencias</a></br>
-                <i class="bi bi-x-circle" id="cerrarUsuario"></i>`);
+                <i class="bi bi-x-circle" id="cerrarUsuario"></i>
+                <button type="button" class="btn-salir">Cerrar sesión</button>`);
         }
-            seccionUsuario.style.display = "block";
+        
+        // Botón para cerrar sesión de los clientes
+        const btnCerrarClientes = document.querySelector(".btn-salir");
+        btnCerrarClientes.addEventListener("click", handle_cerrarClientes);
+        seccionUsuario.style.display = "block";
         // FUNCIONA MAL!!!!!!!
       }).catch(function (err) {
         console.log("Ha habido un error");
@@ -148,6 +153,19 @@ function handle_removeCartItem() {
         (el) => el.title !== this.parentElement.querySelector(".cart-product-title").innerHTML
     );    
     update();
+}
+
+// Pulsamos el botón 'Cerrar sesión'
+function handle_cerrarClientes() {
+    fetch('../public/cerrar.php', {
+        method: 'get'
+      }).then((response) => response.text())
+      .then(function(data) {
+
+      }).catch(function(data) {
+        console.log("Error");
+      }
+    );
 }
 
 function handle_changeItemQuantity(){

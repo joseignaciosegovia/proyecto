@@ -6,7 +6,7 @@
     $crud = new Crud();
 
     // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
-    if (empty($_SESSION["cliente"])) {
+    if (empty($_SESSION['cliente'])) {
         header("Location: ../index.php");
         exit();
     }

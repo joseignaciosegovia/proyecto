@@ -11,6 +11,7 @@
 
     if(isset($_POST['salir'])) {
         unset($_SESSION['trabajador']);
+        unset($_SESSION['departamento']);
         header("Location: servidor.php");
     }
 

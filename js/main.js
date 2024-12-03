@@ -73,7 +73,7 @@ usuarioIcono.addEventListener("click", () => {
             
         // Botón para cerrar sesión de los clientes
         const btnCerrarClientes = document.querySelector(".btn-salir");
-        btnCerrarClientes.addEventListener("click", handle_cerrarClientes());
+        btnCerrarClientes.addEventListener("click", handle_cerrarClientes);
         seccionUsuario.style.display = "block";
 
         // FUNCIONA MAL!!!!!!!
@@ -196,6 +196,21 @@ function handle_buyOrden() {
     const cartContent = cesta.querySelector(".cart-content");
     cartContent.innerHTML = "";
     alert("Su pedido se realizó exitosamente")
+
+    const formData = new FormData();
+    formData.append("productos", JSON.stringify(productosCarrito));
+
+    fetch('public/comprar.php', {
+        method: 'post',
+        body: formData
+      }).then((response) => response.text())
+      .then(function(data) {
+
+      }).catch(function(data) {
+        console.log("Error");
+      }
+    );
+
     productosCarrito = [];
     update();
     
@@ -225,9 +240,6 @@ function handle_cerrarClientes() {
         method: 'get'
       }).then((response) => response.text())
       .then(function(data) {
-
-        // Abrimos en la misma pestaña la página principal
-        window.open("index.php", "_self");
 
       }).catch(function(data) {
         console.log("Error");
