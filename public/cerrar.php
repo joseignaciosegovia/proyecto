@@ -7,6 +7,5 @@
         exit();
     }
 
+    // Cerramos la sesión con el cliente
     unset($_SESSION['cliente']);
-    header("Location: http://localhost/Aplicacion/index.php");
-    exit();

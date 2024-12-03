@@ -240,7 +240,7 @@ function handle_cerrarClientes() {
         method: 'get'
       }).then((response) => response.text())
       .then(function(data) {
-
+        window.open("index.php", "_self");
       }).catch(function(data) {
         console.log("Error");
       }
