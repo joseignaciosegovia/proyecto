@@ -9,6 +9,11 @@
         exit();
     }
 
+    if(isset($_POST['salir'])) {
+        unset($_SESSION['trabajador']);
+        header("Location: servidor.php");
+    }
+
     ?>
     <!DOCTYPE html>
     <html lang="es">
@@ -213,6 +218,9 @@
                     </tbody>
                 </table>
                 <?php
-            breaK;
+            breaK;        
     }
-?>
+    ?>
+    <form method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
+        <input type="submit" class="btn-salir" name="salir" value="Cerrar sesión">
+    </form>

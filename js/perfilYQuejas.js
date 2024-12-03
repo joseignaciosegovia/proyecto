@@ -187,13 +187,13 @@ function handle_trabajadores() {
 // Pulsamos el botón 'Acceso a Usuarios'
 function handle_clientes() {
     // Abrimos en la misma pestaña el acceso a los usuarios
-    window.open("public/accesoUsuario.php", "_self");
+    window.open("public/accesoCliente.php", "_self");
 }
 
 // Pulsamos el botón 'Registrarse'
 function handle_registroClientes() {
     // Abrimos en la misma pestaña el registro de los clientes
-    window.open("public/registroUsuario.php", "_self");
+    window.open("public/registroCliente.php", "_self");
 }
 
 // Actualizar y renderizar

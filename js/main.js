@@ -42,6 +42,7 @@ btnClientes.addEventListener("click", handle_clientes);
 const btnRegistroClientes = document.querySelector(".btn-login");
 btnRegistroClientes.addEventListener("click", handle_registroClientes);
 
+
 let itemsAdded = [];
 
 // Pulsamos en el icono del carrito
@@ -64,9 +65,15 @@ usuario.addEventListener("click", () => {
                 <a>Historial de compras</a></br>
                 <a>Lista de deseos</a></br>
                 <a href="public/quejas.php">Quejas y sugerencias</a></br>
-                <i class="bi bi-x-circle" id="cerrarUsuario"></i>`);
+                <i class="bi bi-x-circle" id="cerrarUsuario"></i>
+                <button type="button" class="btn-salir">Cerrar sesión</button>`);
         }
-            seccionUsuario.style.display = "block";
+            
+        // Botón para cerrar sesión de los clientes
+        const btnCerrarClientes = document.querySelector(".btn-salir");
+        btnCerrarClientes.addEventListener("click", handle_cerrarClientes());
+        seccionUsuario.style.display = "block";
+
         // FUNCIONA MAL!!!!!!!
       }).catch(function (err) {
         console.log("Ha habido un error");
@@ -205,13 +212,29 @@ function handle_trabajadores() {
 // Pulsamos el botón 'Acceso a Usuarios'
 function handle_clientes() {
     // Abrimos en la misma pestaña el acceso a los usuarios
-    window.open("public/accesoUsuario.php", "_self");
+    window.open("public/accesoCliente.php", "_self");
 }
 
 // Pulsamos el botón 'Registrarse'
 function handle_registroClientes() {
     // Abrimos en la misma pestaña el registro de los clientes
-    window.open("public/registroUsuario.php", "_self");
+    window.open("public/registroCliente.php", "_self");
+}
+
+// Pulsamos el botón 'Cerrar sesión'
+function handle_cerrarClientes() {
+    fetch('public/cerrar.php', {
+        method: 'get'
+      }).then((response) => response.text())
+      .then(function(data) {
+
+        // Abrimos en la misma pestaña la página principal
+        window.open("index.php", "_self");
+
+      }).catch(function(data) {
+        console.log("Error");
+      }
+    );
 }
 
 // Actualizar y renderizar

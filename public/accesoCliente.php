@@ -5,7 +5,7 @@ require_once "../controlador/Crud.php";
 
 function error($mensaje) {
     $_SESSION['error'] = $mensaje;
-    header('Location:accesoUsuario.php');
+    header('Location:accesoCliente.php');
     die();
 }
 
@@ -53,7 +53,7 @@ function error($mensaje) {
                     <div class="card">
                         <div class="card-header">
                             <h3>Iniciar sesión</h3>
-                            <h4>¿No tienes cuenta? <a href="registroUsuario.php">Regístrate aquí</a></h4>
+                            <h4>¿No tienes cuenta? <a href="registroCliente.php">Regístrate aquí</a></h4>
                         </div>
                         <div class="card-body">
                             <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>

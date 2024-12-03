@@ -40,6 +40,7 @@ h1 {
 
 #cesta, #usuario {
     position: fixed;
+    z-index: 1;
     top: 0;
     right: 0;
     /*right: -100%;*/
@@ -154,8 +155,8 @@ h1 {
     margin-left: .5rem;
 }
 
-/* Diseño de los botones: 'Añadir productos', 'Acceso a trabajadores', 'Crear usuario' y 'Registrarse' */
-.btn-buy, .btn-trabajadores, .btn-usu, .btn-login{
+/* Diseño de los botones: 'Añadir productos', 'Acceso a trabajadores', 'Crear usuario', 'Registrarse', 'Cerrar sesión' */
+.btn-buy, .btn-trabajadores, .btn-usu, .btn-login, .btn-salir{
     display: flex;
     margin: 1.5rem auto 0 auto;
     padding: 12px 20px;
@@ -168,8 +169,8 @@ h1 {
     transition: .4s;
 }
 
-/* Ponemos el ratón encima de los botones: 'Comprar', 'Acceso a trabajadores', 'Crear usuario' y 'Registrarse' */
-.btn-buy:hover, .btn-trabajadores:hover, .btn-usu:hover, .btn-login:hover{
+/* Ponemos el ratón encima de los botones: 'Comprar', 'Acceso a trabajadores', 'Crear usuario', 'Registrarse', 'Cerrar sesión' */
+.btn-buy:hover, .btn-trabajadores:hover, .btn-usu:hover, .btn-login:hover, .btn-salir:hover{
     background-color: red;
     color: #fdfffc;
 }

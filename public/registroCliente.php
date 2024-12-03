@@ -5,7 +5,7 @@
 
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
-        header('Location:registroUsuario.php');
+        header('Location:registroCliente.php');
         die();
     }
 ?>
@@ -97,7 +97,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Crear Usuario</h3>
-                        <h4>¿Tienes cuenta? <a href="accesoUsuario.php">Inicia sesión aquí</a></h4>
+                        <h4>¿Tienes cuenta? <a href="accesoCliente.php">Inicia sesión aquí</a></h4>
                     </div>
                     <div class="card-body">
                         <form name="crear" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
