@@ -64,8 +64,8 @@ require_once "../vista/header.php";
                         <?php
                             foreach($cliente->compras as $compra) {
                                 echo "<tr>";
-                                echo "<td>$compra->nombre</td>";
-                                echo "<td>$compra->precio</td>";
+                                echo "<td><a href=\"../productos/productos.php?producto=$compra->nombre\">$compra->nombre</a></td>";
+                                echo "<td>$compra->precio" ."€</td>";
                                 echo "<td>$compra->fecha</td>";
                                 echo "</tr>";
                             }
