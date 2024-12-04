@@ -1,6 +1,7 @@
 <?php
     // Cargamos la cabecera
     require_once "vista/header.php";
+    require_once "lib/Request.php";
 ?>
             <div class="btn-group">
                 <button>Novedades</button>
@@ -50,5 +51,12 @@
             require_once "vista/footer.php";
         ?>
         <script src="js/main.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $.getJSON('http://api.wipmania.com/jsonp?callback=?', function (data) {
+                console.log('País: ' + data.address.country);
+            });
+        </script>
     </body>
 </html>

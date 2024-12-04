@@ -57,7 +57,7 @@
     function dep_compras() {
         echo "<h3>Departamento de compras</h3>";
         echo "<h4>Productos</h4>";
-        $crud = new Crud("userTienda", "1234");
+        $crud = new Crud();
         $opciones = ["sort" => ["stock" => 1]];
         // Obtenemos los productos ordenados por stock
         $productos = $crud->listarDatos("productos", [], $opciones);
@@ -82,8 +82,8 @@
                         <td><?php echo $producto->nombre ?></td>
                         <td><?php echo $producto->categoria ?></td>
                         <td><?php echo $producto->descripcion ?></td>
-                        <td><?php echo $producto->precio_actual ?></td>
-                        <td><?php echo $producto->precio_original ?></td>
+                        <td><?php echo $producto->precio_actual . "€" ?></td>
+                        <td><?php echo $producto->precio_original . "€" ?></td>
                         <td><?php echo $producto->stock ?></td>
                     </tr>
                         <?php 
@@ -138,12 +138,40 @@
 
     function dep_analisis() {
         echo "<h3>Departamento de análisis</h3>";
+        echo "<h4>Conexiones</h4>";
+        $crud = new Crud();
+        $conexiones = $crud->listarDatos("conexiones", [], []);
+            ?>
+            <table class="table table-hover">
+                <thead>
+                    <th>#</th>
+                    <th>Usuario</th>
+                    <th>Fecha de acceso</th>
+                </thead>
+                <tbody>
+                    <?php
+                        $cont = 1;
+                        foreach($conexiones as $conexion){
+                    ?>
+                    <tr>
+                        <th><?php echo $cont ?></th>
+                        <td><?php echo $conexion->usuario ?></td>
+                        <td><?php echo date('Y-m-d h:m:s', $conexion->hora); ?></td>
+                        <td><?php echo $conexion->acceso ?></td>
+                    </tr>
+                        <?php 
+                            $cont++;
+                        } 
+                        ?>
+                </tbody>
+            </table>
+            <?php
     }
 
     function dep_gestion() {
         echo "<h3>Departamento de gestión</h3>";
         echo "<h4>Clientes</h4>";
-        $crud = new Crud("userTienda", "1234");
+        $crud = new Crud();
         $contraseñasCl = $crud->listarDatos("contraseñasCl", [], []);
             ?>
             <table class="table table-hover">
@@ -208,7 +236,7 @@
     function dep_tecnico() {
         echo "<h3>Departamento de servicio técnico</h3>";
         echo "<h4>Quejas y sugerencias de clientes</h4>";
-        $crud = new Crud("userTienda", "1234");
+        $crud = new Crud();
         $clientes = $crud->listarDatos("clientes", [], []);
             ?>
             <table class="table table-hover">
