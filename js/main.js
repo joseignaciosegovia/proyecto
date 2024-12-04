@@ -1,12 +1,11 @@
 // Iconos
 const carritoIcono = document.querySelector('.bi-cart-dash');
 const cesta = document.getElementById('cesta');
-const cerrarCarrito = document.querySelector("#cart-close");
 
 const lupaIcono = document.querySelector('.bi-search');
 const usuarioIcono = document.querySelector('.bi-person-circle');
 const seccionUsuario = document.getElementById('usuario');
-const cerrarCesta = document.querySelector('#cerrarCesta');
+const cerrarCesta = document.querySelector('#cerrar-cesta');
 const novedades = document.querySelector('#novedades');
 const ofertas = document.querySelector('#ofertas');
 const ordenadores = document.querySelector('#ordenadores');
@@ -109,29 +108,29 @@ function update() {
 function eventosCarrito() {
 
     // Botón para eliminar artículos del carrito
-    let cartRemove_btns = document.querySelectorAll(".eliminar-cesta");
+    let eliminarCesta_btns = document.querySelectorAll(".eliminar-cesta");
 
-    cartRemove_btns.forEach((btn) => {
-        btn.addEventListener("click", handle_removeCartItem);
+    eliminarCesta_btns.forEach((btn) => {
+        btn.addEventListener("click", handle_eliminarCesta);
     });
 
     // Botón para cambiar la cantidad de artículos del carrito
-    let cartQuantity_inputs = document.querySelectorAll(".cantidad-cesta");
+    let cantidadCesta_inputs = document.querySelectorAll(".cantidad-cesta");
 
-    cartQuantity_inputs.forEach((input) => {
-        input.addEventListener("change", handle_changeItemQuantity);
+    cantidadCesta_inputs.forEach((input) => {
+        input.addEventListener("change", handle_cambiarCantidad);
     });
 
     // Botón para añadir artículos al carrito
-    let addCart_btns = document.querySelectorAll(".add-cart");
+    let añadirCarrito_btns = document.querySelectorAll(".añadir-carrito");
 
-    addCart_btns.forEach((btn) => {
-        btn.addEventListener("click", handle_addCartItem);
+    añadirCarrito_btns.forEach((btn) => {
+        btn.addEventListener("click", handle_añadirCarrito);
     });
 }
 
 // Manejador del botón para añadir artículos al carrito
-function handle_addCartItem() {
+function handle_añadirCarrito() {
     let producto = this.parentElement;
     let nombre = producto.querySelectorAll('p')[0].innerHTML;
     let precioTexto = producto.querySelectorAll('p')[1].textContent;
@@ -154,11 +153,11 @@ function handle_addCartItem() {
     
     // Añadir productos al carrito
 
-    let carBoxElemento = cartBoxComponent(nombre, precio, rutaImagen);
+    let carBoxElemento = cestaBoxComponent(nombre, precio, rutaImagen);
     let nuevoNodo = document.createElement("div");
     nuevoNodo.innerHTML = carBoxElemento;
-    const cartContenido = cesta.querySelector(".cart-content");
-    cartContenido.appendChild(nuevoNodo);
+    const contenidoCesta = cesta.querySelector(".contenido-cesta");
+    contenidoCesta.appendChild(nuevoNodo);
 
     // Activar el icono del carrito
     cesta.style.display = "block";
@@ -166,7 +165,7 @@ function handle_addCartItem() {
     update()
 };
 
-function handle_removeCartItem() {
+function handle_eliminarCesta() {
     this.parentElement.remove();
 
     productosCarrito = productosCarrito.filter(
@@ -175,7 +174,7 @@ function handle_removeCartItem() {
     update();
 }
 
-function handle_changeItemQuantity(){
+function handle_cambiarCantidad(){
     if(isNaN(this.value) || this.value < 1){
         this.value = 1;
     }
@@ -193,8 +192,8 @@ function handle_buyOrden() {
         alert("No tiene ningún producto en la cesta");
         return;
     }
-    const cartContent = cesta.querySelector(".cart-content");
-    cartContent.innerHTML = "";
+    const contenidoCesta = cesta.querySelector(".contenido-cesta");
+    contenidoCesta.innerHTML = "";
     alert("Su pedido se realizó exitosamente")
 
     const formData = new FormData();
@@ -249,14 +248,14 @@ function handle_cerrarClientes() {
 
 // Actualizar y renderizar
 function updateTotal() {
-    let cartBoxes = document.querySelectorAll('.cesta-box');
+    let cestaBoxes = document.querySelectorAll('.cesta-box');
     const totalElement = cesta.querySelector(".precio-total");
     let total=0;
 
-    cartBoxes.forEach((cartBox) => {
-        let precioElemento  = cartBox.querySelector(".precio-cesta");
+    cestaBoxes.forEach((cestaBox) => {
+        let precioElemento  = cestaBox.querySelector(".precio-cesta");
         let precio = parseFloat(precioElemento.innerHTML.replace("€", ""));
-        let cantidad = cartBox.querySelector(".cantidad-cesta").value;
+        let cantidad = cestaBox.querySelector(".cantidad-cesta").value;
 
         total += precio * cantidad;
     });
@@ -266,7 +265,7 @@ function updateTotal() {
     totalElement.innerHTML = total + "€";
 }
 
-function cartBoxComponent(nombre, precio, rutaImagen) {
+function cestaBoxComponent(nombre, precio, rutaImagen) {
     return `
     <div class="cesta-box">
         <img src="${rutaImagen}" alt="" class="imagen-cesta">
@@ -276,7 +275,7 @@ function cartBoxComponent(nombre, precio, rutaImagen) {
         <input type="number" value="1" class="cantidad-cesta">
     </div>
 
-    <!-- ELIMINAR CART -->
+    <!-- ELIMINAR cesta -->
     <i class="bi bi-trash-fill eliminar-cesta"></i>
     `;
 }
@@ -398,7 +397,9 @@ function mostrarProductos(productos, datos) {
             divProductos.childNodes[i].insertAdjacentHTML('beforeend', `<strike>${datos[i]['precio_original']}€</strike>
             `);
         }
-        divProductos.childNodes[i].insertAdjacentHTML('beforeend', `<i class="bi bi-bag-dash-fill add-cart"></i>
+        // Añadimos los iconos de añadir a la lista de deseos y de añadir al carrito
+        divProductos.childNodes[i].insertAdjacentHTML('beforeend', `<i class="bi bi-heart"></i>
+            <i class="bi bi-bag-dash-fill añadir-carrito"></i>
         `);
     }
 }

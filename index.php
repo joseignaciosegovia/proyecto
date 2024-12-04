@@ -20,7 +20,7 @@
 
         <div class="cesta" id="cesta">
             <h2 class="cesta-titulo">Cesta</h2>
-            <div class="cart-content">
+            <div class="contenido-cesta">
 
             </div>
 
@@ -30,7 +30,7 @@
             </div>
 
             <button type="button" class="btn-comprar">Comprar</button>
-            <i class="bi bi-x-circle" id="cerrarCesta"></i>
+            <i class="bi bi-x-circle" id="cerrar-cesta"></i>
         </div>
         <div id="novedades">
             

@@ -90,25 +90,25 @@ function addEvents() {
     let cartRemove_btns = document.querySelectorAll(".cart-remove");
 
     cartRemove_btns.forEach((btn) => {
-        btn.addEventListener("click", handle_removeCartItem);
+        btn.addEventListener("click", handle_eliminarCesta);
     });
 
     // Botón para cambiar la cantidad de artículos del carrito
     let cartQuantity_inputs = document.querySelectorAll(".cart-quantity");
 
     cartQuantity_inputs.forEach((input) => {
-        input.addEventListener("change", handle_changeItemQuantity);
+        input.addEventListener("change", handle_cambiarCantidad);
     });
 
     // Botón para añadir artículos al carrito
     let addCart_btns = document.querySelectorAll(".add-cart");
 
     addCart_btns.forEach((btn) => {
-        btn.addEventListener("click", handle_addCartItem);
+        btn.addEventListener("click", handle_añadirCarrito);
     });
 }
 
-function handle_addCartItem() {
+function handle_añadirCarrito() {
     let product = this.parentElement;
     console.log(product);
     let title = product.querySelector(".product-title").innerHTML;
@@ -134,7 +134,7 @@ function handle_addCartItem() {
     
     // Añadir productos al carrito
 
-    let carBoxElement = cartBoxComponent(title, price, imgSrc);
+    let carBoxElement = cestaBoxComponent(title, price, imgSrc);
     let newNode = document.createElement("div");
     newNode.innerHTML = carBoxElement;
     const cartContent = cart.querySelector(".cart-content");
@@ -146,7 +146,7 @@ function handle_addCartItem() {
     update()
 };
 
-function handle_removeCartItem() {
+function handle_eliminarCesta() {
     this.parentElement.remove();
 
     itemsAdded = itemsAdded.filter(
@@ -233,7 +233,7 @@ function updateTotal() {
     totalElement.innerHTML = "$" + total;
 }
 
-function cartBoxComponent(title, price, imgSrc) {
+function cestaBoxComponent(title, price, imgSrc) {
     return `
     <div class="cart-box">
         <img src="${imgSrc}" alt="" class="cart-img">
