@@ -29,17 +29,72 @@ function error($mensaje) {
         if (isset($_POST['login'])) {
             $nombre = trim($_POST['usuario']);
             $contraseña = trim($_POST['pass']);
+
+            $crud = new Crud();
+            $acceso;
+            $fecha = time();
+            $fechaBloqueado = 0;
+
+            // Si es la primera vez que intentamos acceder con este usuario
+            if(!isset($_SESSION[$nombre])){
+                $_SESSION[$nombre]['bloqueado'] = 0;
+            }
+
+            // Si el usuario con el que intentamos acceder está bloqueado
+            if($_SESSION[$nombre]['bloqueado'] + 600 >= $fecha)
+                error("Demasiados intentos erróneos con el usuario '$nombre'. No podrá iniciar sesión durante diez minutos");
+            
+            // Si el usuario no está bloqueado
+            // Si el nombre de usuario o la contraseña son solo espacios en blanco
             if (strlen($nombre) == 0 || strlen($contraseña) == 0) {
+                $acceso = "Denegado";
+                $crud->añadirDatos("conexiones", 
+                    ["usuario" => $nombre, "contraseña" => $contraseña, "hora" => $fecha, "acceso" => $acceso], []);
                 error("Error, El nombre o la contraseña no pueden contener solo espacios en blancos.");
             }
 
             // Comprobamos si existe un cliente con el usuario y la contraseña introducidos
-            $crud = new Crud();
+            
             $cliente = $crud->isValido("clientes", $nombre, $contraseña);
             // Si no existe, mostramos el error y actualizamos la página
             if ($cliente == null) {
+                $acceso = "Denegado";
+                $crud->añadirDatos("conexiones", 
+                    ["usuario" => $nombre, "contraseña" => $contraseña, "hora" => $fecha, "acceso" => $acceso], []);
+                
+                unset($_POST['login']);
+                
+                // Comprobamos si el usuario debería bloquearse
+                $accesosIncorrectos = 0;
+                $accesos = $crud->listarDatos("conexiones", ["usuario" => $nombre, "hora" => ["\$gte" => ($fecha - 180)]], ["sort" => ["hora" => -1]]);
+                
+                // Recorremos los accesos con este usuario en los últimos tres minutos empezando por los más recientes
+                foreach($accesos as $acceso) {
+                    // Si el acceso fue denegado, incrementamos el número de accesos incorrectos
+                    if($acceso['acceso'] == "Denegado")
+                        $accesosIncorrectos++;
+                    // Si el acceso fue aceptado, dejamos de contar
+                    else {
+                        $accesosIncorrectos = 0;
+                        break;
+                    }
+                    // Guardamos la fecha del intento más reciente porque será la fecha en que se bloquee el usuario
+                    if($accesosIncorrectos == 1) 
+                        $fechaBloqueado = $acceso['hora'];
+                    // Si ha habido cinco accesos denegados seguidos bloqueamos al usuario guardando la fecha de bloqueo
+                    else if($accesosIncorrectos == 5) {
+                        $_SESSION[$nombre]['bloqueado'] = $fechaBloqueado;
+                        error("Demasiados intentos erróneos con el usuario '$nombre'. No podrá iniciar sesión en los próximos diez minutos");
+                    }
+                }
+                
                 error("Credenciales Inválidas");
             }
+
+            // Si el acceso es correcto
+            $acceso = "Concedido";
+            $crud->añadirDatos("conexiones", 
+                ["usuario" => $nombre, "contraseña" => $contraseña, "hora" => $fecha, "acceso" => $acceso], []);
 
             $_SESSION['cliente'] = $nombre;
 

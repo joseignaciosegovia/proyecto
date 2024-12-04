@@ -126,7 +126,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="tel">Teléfono</label>
-                                <input type="tel" class="form-control" id="tel" placeholder="Teléfono" name="telefono" required>
+                                <input type="tel" class="form-control" id="tel" placeholder="Teléfono" name="telefono" pattern="[0-9]{9}">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary mr-3" name="enviar">Crear</button>
