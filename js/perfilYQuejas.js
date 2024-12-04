@@ -46,7 +46,7 @@ usuario.addEventListener("click", () => {
             seccionUsuario.replaceChildren();
             seccionUsuario.insertAdjacentHTML('beforeend', `</br></br><a href="perfil.php">Perfil</a></br>
                 <a href="historialCompras.php">Historial de compras</a></br>
-                <a>Lista de deseos</a></br>
+                <a href="listaDeseos.php">Lista de deseos</a></br>
                 <a href="quejas.php">Quejas y sugerencias</a></br>
                 <i class="bi bi-x-circle" id="cerrarUsuario"></i>
                 <button type="button" class="btn-salir">Cerrar sesión</button>`);

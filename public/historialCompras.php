@@ -9,16 +9,18 @@
         die();
     }
 
-    $crud = new Crud();
-
     // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
     if (empty($_SESSION["cliente"])) {
         header("Location: ../index.php");
         exit();
     }
 
-// Cargamos la cabecera
-require_once "../vista/header.php";
+    $crud = new Crud();
+    $cliente = $crud->obtenerDatos("clientes", ["usuario" => $_SESSION['cliente']], []);
+    if($cliente->compras->count() > 0){
+
+        // Cargamos la cabecera
+        require_once "../vista/header.php";
 ?>
         </header>
 
@@ -47,11 +49,7 @@ require_once "../vista/header.php";
 
         <div>
         <div class="row">
-            <?php 
-                $cliente = $crud->obtenerDatos("clientes", ["usuario" => $_SESSION['cliente']], []);
-                if($cliente->compras->count() > 0){
-
-            ?> 
+            
             <div class="col-md-6">
                 <h2>Historial de compras</h2>
                 <table class="table table-hover">
@@ -77,12 +75,14 @@ require_once "../vista/header.php";
                 } 
                 else{
                     // NO MUESTRA EL DIÁLOGO
-                    echo "<dialog open>
+                ?>
+                    <dialog open>
                         <p>No ha comprado ningún producto hasta el momento</p>
-                        <button>OK</button>
-                    </dialog>";
-                    header("Location: ../index.php");
-                    exit();
+                        <button onclick="<?php header("Location: ../index.php") ?>">OK</button>
+                    </dialog>
+                <?php
+                    //header("Location: ../index.php");
+                    //exit();
                 }
             // Cargamos el pie
             require_once "../vista/footer.php";
