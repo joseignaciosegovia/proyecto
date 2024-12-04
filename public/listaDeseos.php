@@ -49,20 +49,20 @@ require_once "../vista/header.php";
         <div class="row">
             <?php 
                 $cliente = $crud->obtenerDatos("clientes", ["usuario" => $_SESSION['cliente']], []);
-                if($cliente->compras->count() > 0){
+                if($cliente->deseos->count() > 0){
 
             ?> 
             <div class="col-md-6">
-                <h2>Historial de compras</h2>
+                <h2>Lista de deseos</h2>
                 <table class="table table-hover">
                     <thead>
                         <th>Producto</th>
                         <th>Precio</th>
-                        <th>Fecha en que se compró</th>
+                        <th>Fecha en que se añadió</th>
                     </thead>
                     <tbody>
                         <?php
-                            foreach($cliente->compras as $deseo) {
+                            foreach($cliente->deseos as $deseo) {
                                 echo "<tr>";
                                 echo "<td><a href=\"../productos/productos.php?producto=$deseo->nombre\">$deseo->nombre</a></td>";
                                 echo "<td>$deseo->precio" ."€</td>";

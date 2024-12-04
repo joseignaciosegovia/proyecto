@@ -64,7 +64,7 @@ usuarioIcono.addEventListener("click", () => {
             seccionUsuario.replaceChildren();
             seccionUsuario.insertAdjacentHTML('beforeend', `</br></br><a href="public/perfil.php">Perfil</a></br>
                 <a href="public/historialCompras.php">Historial de compras</a></br>
-                <a>Lista de deseos</a></br>
+                <a href="public/listaDeseos.php">Lista de deseos</a></br>
                 <a href="public/quejas.php">Quejas y sugerencias</a></br>
                 <i class="bi bi-x-circle" id="cerrarUsuario"></i>
                 <button type="button" class="btn-salir">Cerrar sesión</button>`);
@@ -101,11 +101,11 @@ window.addEventListener('load', function() {
 
 // Actualizar carrito
 function update() {
-    eventosCarrito();
+    eventos();
     updateTotal();
 }
 
-function eventosCarrito() {
+function eventos() {
 
     // Botón para eliminar artículos del carrito
     let eliminarCesta_btns = document.querySelectorAll(".eliminar-cesta");
@@ -122,10 +122,17 @@ function eventosCarrito() {
     });
 
     // Botón para añadir artículos al carrito
-    let añadirCarrito_btns = document.querySelectorAll(".añadir-carrito");
+    let añadirCarrito = document.querySelectorAll(".añadir-carrito");
 
-    añadirCarrito_btns.forEach((btn) => {
-        btn.addEventListener("click", handle_añadirCarrito);
+    añadirCarrito.forEach((boton) => {
+        boton.addEventListener("click", handle_añadirCarrito);
+    });
+
+    // Botón para añadir artículos a la lista de deseos
+    let añadirDeseos = document.querySelectorAll(".añadir-deseos");
+
+    añadirDeseos.forEach((boton) => {
+        boton.addEventListener("click", handle_añadirDeseos);
     });
 }
 
@@ -165,6 +172,27 @@ function handle_añadirCarrito() {
     update()
 };
 
+// Manejador del botón para añadir artículos a la lista de deseos
+function handle_añadirDeseos() {
+
+    const formData = new FormData();
+
+    const producto = [this.parentNode.querySelector('a').innerText, this.parentNode.querySelectorAll('p')[1].innerText];
+
+    formData.append("producto", JSON.stringify(producto));
+
+    fetch('servidor/deseos.php', {
+        method: 'post',
+        body: formData
+      }).then((response) => response.text())
+      .then(function(data) {
+        alert(data);
+      }).catch(function(data) {
+        console.log("Error");
+      }
+    );
+}
+
 function handle_eliminarCesta() {
     this.parentElement.remove();
 
@@ -187,7 +215,7 @@ function handle_cambiarCantidad(){
 
 function handle_buyOrden() {
 
-    // Si se intenta comprar hacer de hacer un pedido
+    // Si se intenta comprar antes de hacer un pedido
     if(productosCarrito.length <= 0){
         alert("No tiene ningún producto en la cesta");
         return;
@@ -305,7 +333,7 @@ async function cargarNovedades() {
         console.log("Error: " + error);
     }
 
-    eventosCarrito();
+    eventos();
 }
 
 // Cargamos las ofertas
@@ -398,7 +426,7 @@ function mostrarProductos(productos, datos) {
             `);
         }
         // Añadimos los iconos de añadir a la lista de deseos y de añadir al carrito
-        divProductos.childNodes[i].insertAdjacentHTML('beforeend', `<i class="bi bi-heart"></i>
+        divProductos.childNodes[i].insertAdjacentHTML('beforeend', `<i class="bi bi-heart añadir-deseos"></i>
             <i class="bi bi-bag-dash-fill añadir-carrito"></i>
         `);
     }
