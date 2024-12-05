@@ -42,15 +42,25 @@
             $productosEliminar = $datos[1];
 
             $cliente = $crud->obtenerDatos("clientes", ["usuario" => $_SESSION['cliente']], []);
+
+            $encontrado;
+            $listaDeseos = [];
+            
             foreach($cliente->deseos as $deseo) {
+                $encontrado = false;
                 foreach($productosEliminar as $producto){
                     if($deseo->nombre == $producto){
-                        
+                        $encontrado = true;
                         break;
                     }
-                    
+                }
+                if(!$encontrado){
+                    $listaDeseos[] = ["nombre" => $deseo->nombre, "precio" => $deseo->precio, "fecha" => $deseo->fecha];
                 }
             }
+
+            $crud->actualizarDatos("clientes", ["usuario" => $_SESSION['cliente']], ["deseos" => $listaDeseos]);
+            echo "Se han borrado los productos seleccionados de la lista de deseos ";
             
             break;
     }
