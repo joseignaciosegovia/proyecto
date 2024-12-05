@@ -418,7 +418,7 @@ function mostrarProductos(productos, datos) {
     for(let i = 0; i < 6 && i < datos.length; i++) {
         divProductos.insertAdjacentHTML('beforeend', `<div class="productos">
             <img class="imagenProducto" src="img/${datos[i]['imagen']}"></img>
-            <a href="productos/productos.php?producto=${datos[i]['nombre']}"><p>${datos[i]['nombre']}</p></a>
+            <a href="public/productos.php?producto=${datos[i]['nombre']}"><p>${datos[i]['nombre']}</p></a>
             <p>${datos[i]['precio_actual']}€</p>
         </div>`);
         if(datos[i]['precio_actual'] != datos[i]['precio_original']){

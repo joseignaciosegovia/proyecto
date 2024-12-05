@@ -62,7 +62,7 @@
                         <?php
                             foreach($cliente->compras as $deseo) {
                                 echo "<tr>";
-                                echo "<td><a href=\"../productos/productos.php?producto=$deseo->nombre\">$deseo->nombre</a></td>";
+                                echo "<td><a href=\"../public/productos.php?producto=$deseo->nombre\">$deseo->nombre</a></td>";
                                 echo "<td>$deseo->precio" ."€</td>";
                                 echo "<td>$deseo->fecha</td>";
                                 echo "</tr>";
