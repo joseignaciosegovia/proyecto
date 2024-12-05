@@ -60,7 +60,8 @@
             }
 
             $crud->actualizarDatos("clientes", ["usuario" => $_SESSION['cliente']], ["deseos" => $listaDeseos]);
+            // NO MUESTRA EL MENSAJE
             echo "Se han borrado los productos seleccionados de la lista de deseos ";
-            
+            header("Location: ../public/listaDeseos.php");
             break;
     }

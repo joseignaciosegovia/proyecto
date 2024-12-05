@@ -28,11 +28,7 @@
             $datos = ["eliminar", $_POST['productos']];
             $datos2 = json_encode($datos);
             header("Location: ../servidor/actualizarListaDeseos.php?datos=$datos2");
-            /*foreach($_POST['productos'] as $producto) {
-                $accion = ["eliminar", $producto];
-                $accion2 = json_encode($accion);
-                header("Location: ../servidor/actualizarListaDeseos.php?datos=$accion2");
-            }*/
+            // PUEDO RECOGER LOS DATOS?
         }
         else {
             echo "</br>Debes seleccionar algun alumno (mediante su checkbox)";
