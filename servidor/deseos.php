@@ -5,7 +5,6 @@
     if (empty($_SESSION["cliente"])) {
         // NO HACE NADA
         echo "Tiene que iniciar sesión para poder guardar productos en la lista de deseos";
-        header("Location: ../index.php");
         exit();
     }
 
@@ -16,6 +15,14 @@
     $producto = json_decode($_POST['producto']);
 
     $cliente = $crud->obtenerDatos("clientes", ["usuario" => $_SESSION['cliente']], []);
+
+    foreach($cliente->deseos as $deseo){
+        if($deseo->nombre == $producto[0]){
+            echo "Ya existe el producto en la lista de deseos";
+            exit();
+        }
+    }
+    
     // Añadimos el artículo al final del array de deseos
     $cliente->deseos[] = ["nombre" => $producto[0], "precio" => $producto[1], "fecha" => date('Y-m-d h:i:s a', time())];
 

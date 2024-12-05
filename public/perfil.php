@@ -137,6 +137,6 @@
             // Cargamos el pie
             require_once "../vista/footer.php";
         ?>
-        <script type="module" src="../js/seccionesCliente.js"></script>
+        <script type="module" src="/Aplicacion/js/seccionesCliente.js"></script>
     </body>
 </html>

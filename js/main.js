@@ -1,3 +1,15 @@
+import {
+    cargarNovedades,
+    cargarOfertas,
+    cargarOrdenadores,
+    cargarComponentes,
+    handle_cerrarClientes,
+    handle_buyOrden,
+    handle_trabajadores,
+    handle_clientes,
+    handle_registroClientes,
+} from './funciones.js';
+
 // Iconos
 const carritoIcono = document.querySelector('.bi-cart-dash');
 const cesta = document.getElementById('cesta');
@@ -99,12 +111,12 @@ window.addEventListener('load', function() {
     cargarNovedades();
 });
 
-// Actualizar carrito
+/*// Actualizar carrito
 function update() {
     eventos();
     updateTotal();
-}
-
+}*/
+/*
 function eventos() {
 
     // Botón para eliminar artículos del carrito
@@ -134,9 +146,9 @@ function eventos() {
     añadirDeseos.forEach((boton) => {
         boton.addEventListener("click", handle_añadirDeseos);
     });
-}
+}*/
 
-// Manejador del botón para añadir artículos al carrito
+/*// Manejador del botón para añadir artículos al carrito
 function handle_añadirCarrito() {
     let producto = this.parentElement;
     let nombre = producto.querySelectorAll('p')[0].innerHTML;
@@ -170,9 +182,9 @@ function handle_añadirCarrito() {
     cesta.style.display = "block";
 
     update()
-};
+};*/
 
-// Manejador del botón para añadir artículos a la lista de deseos
+/*// Manejador del botón para añadir artículos a la lista de deseos
 function handle_añadirDeseos() {
 
     const formData = new FormData();
@@ -191,8 +203,8 @@ function handle_añadirDeseos() {
         console.log("Error");
       }
     );
-}
-
+}*/
+/*
 function handle_eliminarCesta() {
     this.parentElement.remove();
 
@@ -200,8 +212,8 @@ function handle_eliminarCesta() {
         (el) => el.title !== this.parentElement.querySelector(".nombre-producto-cesta").innerHTML
     );    
     update();
-}
-
+}*/
+/*
 function handle_cambiarCantidad(){
     if(isNaN(this.value) || this.value < 1){
         this.value = 1;
@@ -211,8 +223,8 @@ function handle_cambiarCantidad(){
     this.value = Math.floor(this.value); 
 
     update();
-}
-
+}*/
+/*
 function handle_buyOrden() {
     // Si se intenta comprar antes de hacer un pedido
     if(productosCarrito.length <= 0){
@@ -239,27 +251,27 @@ function handle_buyOrden() {
 
     productosCarrito = [];
     update();
-}
+}*/
 
-// Pulsamos el botón 'Acceso a trabajadores'
+/*// Pulsamos el botón 'Acceso a trabajadores'
 function handle_trabajadores() {
     // Abrimos una pestaña con el acceso a los trabajadores
     window.open("servidor/servidor.php", "Intranet");
-}
+}*/
 
-// Pulsamos el botón 'Acceso a Usuarios'
+/*// Pulsamos el botón 'Acceso a Usuarios'
 function handle_clientes() {
     // Abrimos en la misma pestaña el acceso a los usuarios
     window.open("public/accesoCliente.php", "_self");
-}
+}*/
 
-// Pulsamos el botón 'Registrarse'
+/*// Pulsamos el botón 'Registrarse'
 function handle_registroClientes() {
     // Abrimos en la misma pestaña el registro de los clientes
     window.open("public/registroCliente.php", "_self");
-}
+}*/
 
-// Pulsamos el botón 'Cerrar sesión'
+/*// Pulsamos el botón 'Cerrar sesión'
 function handle_cerrarClientes() {
     fetch('/Aplicacion/public/cerrar.php', {
         method: 'get'
@@ -270,9 +282,9 @@ function handle_cerrarClientes() {
         console.log("Error");
       }
     );
-}
+}*/
 
-// Actualizar y renderizar
+/*// Actualizar y renderizar
 function updateTotal() {
     let cestaBoxes = document.querySelectorAll('.cesta-box');
     const totalElement = cesta.querySelector(".precio-total");
@@ -289,8 +301,8 @@ function updateTotal() {
     total = total.toFixed(2);
 
     totalElement.innerHTML = total + "€";
-}
-
+}*/
+/*
 function cestaBoxComponent(nombre, precio, rutaImagen) {
     return `
     <div class="cesta-box">
@@ -304,9 +316,9 @@ function cestaBoxComponent(nombre, precio, rutaImagen) {
     <!-- ELIMINAR cesta -->
     <i class="bi bi-trash-fill eliminar-cesta"></i>
     `;
-}
+}*/
 
-// Cargamos las novedades
+/*// Cargamos las novedades
 async function cargarNovedades() {
     // Ocultamos el resto de secciones y mostramos la sección de novedades
     ofertas.style.display = "none";
@@ -332,9 +344,9 @@ async function cargarNovedades() {
     }
 
     eventos();
-}
+}*/
 
-// Cargamos las ofertas
+/*// Cargamos las ofertas
 function cargarOfertas() {
     // Ocultamos el resto de secciones y mostramos la sección de ofertas
     ofertas.style.display = "block";
@@ -357,9 +369,9 @@ function cargarOfertas() {
       }).catch(function (err) {
         console.log("Ha habido un error");
       });
-}
+}*/
 
-// Cargamos los ordenadores
+/*// Cargamos los ordenadores
 function cargarOrdenadores() {
     // Ocultamos el resto de secciones y mostramos la sección de ordenadores
     ofertas.style.display = "none";
@@ -382,10 +394,10 @@ function cargarOrdenadores() {
       }).catch(function (err) {
         console.log("Ha habido un error");
       });
-}
+}*/
 
-// Cargamos los componentes
-function cargarComponentes() {
+/*// Cargamos los componentes
+async function cargarComponentes() {
     // Ocultamos el resto de secciones y mostramos la sección de novedades
     ofertas.style.display = "none";
     ordenadores.style.display = "none";
@@ -398,17 +410,20 @@ function cargarComponentes() {
     const formData = new FormData();
     formData.append("data", "componentes");
 
-    fetch('servidor/devolverProductos.php', {
-        method: 'post',
-        body: formData
-      }).then ((response) => response.json()
-      ).then(function (datos) {
+    try {
+        const respuesta = await fetch('servidor/devolverProductos.php', {
+            method: 'post',
+            body: formData
+          });
+        const datos = await respuesta.json();
         mostrarProductos(componentes, datos);
-      }).catch(function (err) {
-        console.log("Ha habido un error");
-      });
-}
+    } catch(error) {
+        console.log("Error: " + error);
+    }
 
+      eventos();
+}*/
+/*
 function mostrarProductos(productos, datos) {
     productos.insertAdjacentHTML('beforeend', `<div class="divProductos"></div>`);
     let divProductos = productos.childNodes[1];
@@ -428,4 +443,4 @@ function mostrarProductos(productos, datos) {
             <i class="bi bi-bag-dash-fill añadir-carrito"></i>
         `);
     }
-}
+}*/

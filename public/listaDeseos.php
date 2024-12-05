@@ -17,8 +17,17 @@
         exit();
     }
 
-// Cargamos la cabecera
-require_once "../vista/header.php";
+    // Cargamos la cabecera
+    require_once "../vista/header.php";
+
+    if(isset($_POST['Actualizar'])){
+        foreach($_POST as $clave => $valor) {
+            if($clave != "Actualizar" && $clave != "Productos"){
+
+            }
+        }
+        
+    }
 ?>
         </header>
 
@@ -54,24 +63,30 @@ require_once "../vista/header.php";
             ?> 
             <div class="col-md-6">
                 <h2>Lista de deseos</h2>
-                <table class="table table-hover">
-                    <thead>
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Fecha en que se añadió</th>
-                    </thead>
-                    <tbody>
-                        <?php
-                            foreach($cliente->deseos as $deseo) {
-                                echo "<tr>";
-                                echo "<td><a href=\"../public/productos.php?producto=$deseo->nombre\">$deseo->nombre</a></td>";
-                                echo "<td>$deseo->precio" ."€</td>";
-                                echo "<td>$deseo->fecha</td>";
-                                echo "</tr>";
-                            }
-                        ?>
-                    </tbody> 
-                </table>
+                <form method="POST">
+                    <table class="table table-hover">
+                        <thead>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Fecha en que se añadió</th>
+                            <th>Eliminar de la lista</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                                foreach($cliente->deseos as $deseo) {
+                                    echo "<tr>";
+                                    echo "<td><a href=\"../public/productos.php?producto=$deseo->nombre\">$deseo->nombre</a></td>";
+                                    echo "<td>$deseo->precio</td>";
+                                    echo "<td>$deseo->fecha</td>";
+                                    echo "<td><input type='checkbox' name='productos[]' value='" . $deseo->nombre . "'/></td>";
+                                    echo "</tr>";
+                                }
+                            ?>
+                        </tbody> 
+                        
+                    </table>
+                    <input type="submit" value="Actualizar" name="Actualizar">
+                </form>
             </div>
             <?php 
                 } 
@@ -87,6 +102,6 @@ require_once "../vista/header.php";
             // Cargamos el pie
             require_once "../vista/footer.php";
         ?>
-        <script type="module" src="../js/perfilYQuejas.js"></script>
+        <script type="module" src="/Aplicacion/js/seccionesCliente.js"></script>
     </body>
 </html>

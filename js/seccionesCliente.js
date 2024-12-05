@@ -1,17 +1,9 @@
 import {
-    update,
     manejadores,
     botonComprar,
-    cestaBoxComponent,
     handle_añadirCarrito,
     handle_eliminarCesta,
-    handle_cerrarClientes,
-    handle_cambiarCantidad,
-    handle_buyOrden,
-    handle_trabajadores,
-    handle_clientes,
-    handle_registroClientes,
-    updateTotal
+    handle_cambiarCantidad
 } from './funciones.js';
 
 // Iconos
@@ -23,7 +15,7 @@ const usuarioIcono = document.querySelector('.bi-person-circle');
 const seccionUsuario = document.getElementById('usuario');
 const cerrarCesta = document.querySelector('#cerrar-cesta');*/
 
-/*
+/* Botones
 // Botón para comprar
 const buy_btn = document.querySelector(".btn-comprar");
 buy_btn.addEventListener("click", handle_buyOrden);
