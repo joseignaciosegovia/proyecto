@@ -1,0 +1,315 @@
+[{
+  "_id": {
+    "$oid": "67501f5cec56f244890c89d1"
+  },
+  "usuario": "",
+  "contraseña": "asdfa",
+  "hora": 1733304086,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67501fa8ec56f244890c89d2"
+  },
+  "usuario": "asdf",
+  "contraseña": "",
+  "hora": 1733304197,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67501fdcec56f244890c89d3"
+  },
+  "usuario": "antL",
+  "contraseña": "asdfas",
+  "hora": 1733304261,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67502058ec56f244890c89d4"
+  },
+  "usuario": "antL",
+  "contraseña": "jjjj",
+  "hora": 1733304408,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "6750207fec56f244890c89d5"
+  },
+  "usuario": "antL",
+  "contraseña": "asdf",
+  "hora": 1733304433,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675020c6ec56f244890c89d6"
+  },
+  "usuario": "antL",
+  "contraseña": "asdfffff",
+  "hora": 1733304508,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67502164ec56f244890c89d7"
+  },
+  "usuario": "antL",
+  "contraseña": "ooo",
+  "hora": 1733304676,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "6750216bec56f244890c89d8"
+  },
+  "usuario": "antL",
+  "contraseña": "jjj",
+  "hora": 1733304683,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67502180ec56f244890c89d9"
+  },
+  "usuario": "antL",
+  "contraseña": "ppp",
+  "hora": 1733304697,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675021d5ec56f244890c89da"
+  },
+  "usuario": "rupLop",
+  "contraseña": "asdfas",
+  "hora": 1733304789,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675021dbec56f244890c89db"
+  },
+  "usuario": "rupLop",
+  "contraseña": "0000",
+  "hora": 1733304795,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675021e0ec56f244890c89dc"
+  },
+  "usuario": "rupLop",
+  "contraseña": "999",
+  "hora": 1733304800,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675021e5ec56f244890c89dd"
+  },
+  "usuario": "rupLop",
+  "contraseña": "999",
+  "hora": 1733304804,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675021eaec56f244890c89de"
+  },
+  "usuario": "rupLop",
+  "contraseña": "888",
+  "hora": 1733304809,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67502449ec56f244890c89df"
+  },
+  "usuario": "rupLop",
+  "contraseña": "ii",
+  "hora": 1733305417,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67502453ec56f244890c89e0"
+  },
+  "usuario": "rupLop",
+  "contraseña": "8888",
+  "hora": 1733305427,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67502459ec56f244890c89e1"
+  },
+  "usuario": "rupLop",
+  "contraseña": "333",
+  "hora": 1733305433,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67502465ec56f244890c89e2"
+  },
+  "usuario": "rupLop",
+  "contraseña": "asdf",
+  "hora": 1733305445,
+  "acceso": "Concedido"
+},
+{
+  "_id": {
+    "$oid": "67502475ec56f244890c89e3"
+  },
+  "usuario": "rupLop",
+  "contraseña": "iii",
+  "hora": 1733305461,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67502479ec56f244890c89e4"
+  },
+  "usuario": "rupLop",
+  "contraseña": "ee",
+  "hora": 1733305465,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "6750247eec56f244890c89e5"
+  },
+  "usuario": "rupLop",
+  "contraseña": "ww",
+  "hora": 1733305470,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67502482ec56f244890c89e6"
+  },
+  "usuario": "rupLop",
+  "contraseña": "qq",
+  "hora": 1733305474,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67502486ec56f244890c89e7"
+  },
+  "usuario": "rupLop",
+  "contraseña": "tt",
+  "hora": 1733305478,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "6750249bec56f244890c89e8"
+  },
+  "usuario": "ped",
+  "contraseña": "ii",
+  "hora": 1733305499,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675024a1ec56f244890c89e9"
+  },
+  "usuario": "ped",
+  "contraseña": "ooped",
+  "hora": 1733305505,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675024a6ec56f244890c89ea"
+  },
+  "usuario": "ped",
+  "contraseña": "88",
+  "hora": 1733305510,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675024abec56f244890c89eb"
+  },
+  "usuario": "uue",
+  "contraseña": "qwer",
+  "hora": 1733305515,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675024b3ec56f244890c89ec"
+  },
+  "usuario": "bbd",
+  "contraseña": "a",
+  "hora": 1733305523,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675024b8ec56f244890c89ed"
+  },
+  "usuario": "ped",
+  "contraseña": "vbb",
+  "hora": 1733305528,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "675024beec56f244890c89ee"
+  },
+  "usuario": "ped",
+  "contraseña": "bxn",
+  "hora": 1733305534,
+  "acceso": "Denegado"
+},
+{
+  "_id": {
+    "$oid": "67503f58ec56f244890c89f0"
+  },
+  "usuario": "ped23",
+  "contraseña": "ped23",
+  "hora": 1733312344,
+  "acceso": "Concedido"
+},
+{
+  "_id": {
+    "$oid": "67504064ec56f244890c89f1"
+  },
+  "usuario": "ped23",
+  "contraseña": "ped23",
+  "hora": 1733312612,
+  "acceso": "Concedido"
+},
+{
+  "_id": {
+    "$oid": "6750448bec56f244890c89f2"
+  },
+  "usuario": "antL",
+  "contraseña": "contr",
+  "hora": 1733313675,
+  "acceso": "Concedido"
+},
+{
+  "_id": {
+    "$oid": "675044a3ec56f244890c89f3"
+  },
+  "usuario": "ped23",
+  "contraseña": "ped23",
+  "hora": 1733313698,
+  "acceso": "Concedido"
+},
+{
+  "_id": {
+    "$oid": "67515124d7fa04322e06140a"
+  },
+  "usuario": "ped23",
+  "contraseña": "ped23",
+  "hora": 1733382436,
+  "acceso": "Concedido"
+}]

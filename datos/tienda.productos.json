@@ -1,0 +1,116 @@
+[{
+  "_id": {
+    "$oid": "6746c780cd9f6eabed923198"
+  },
+  "nombre": "Ordenador HP Ryzen 5400",
+  "categoria": "Ordenador",
+  "descripcion": "Es un ordenador sobremesa",
+  "stock": 2,
+  "fecha": "2024-11-27",
+  "imagen": "OrdenadorHPRyzen5400.jpg",
+  "precio_actual": 550,
+  "precio_original": 550
+},
+{
+  "_id": {
+    "$oid": "6746c7b4cd9f6eabed92319a"
+  },
+  "nombre": "Ordenador Toshiba Ryzen 4000",
+  "categoria": "Ordenador",
+  "descripcion": "Es un ordenador portátil",
+  "precio_actual": 650,
+  "precio_original": 650,
+  "stock": 1,
+  "fecha": "2023-01-23",
+  "imagen": "OrdenadorToshibaRyzen4000.jpg"
+},
+{
+  "_id": {
+    "$oid": "6746e82fcd9f6eabed9231c9"
+  },
+  "nombre": "Ordenador HP Intel i9",
+  "categoria": "Ordenador",
+  "descripcion": "Es un ordenador sobremesa",
+  "precio_actual": 799,
+  "precio_original": 899,
+  "stock": 3,
+  "fecha": "2022-05-20",
+  "imagen": "OrdenadorHPInteli9.attach"
+},
+{
+  "_id": {
+    "$oid": "6746e845cd9f6eabed9231cb"
+  },
+  "nombre": "Ordenador HP Ryzen 3600",
+  "categoria": "Ordenador",
+  "descripcion": "Es un ordenador portátil",
+  "precio_actual": 600,
+  "precio_original": 700,
+  "stock": 1,
+  "fecha": "2019-06-23",
+  "imagen": "OrdenadorHPRyzen3600.jpg"
+},
+{
+  "_id": {
+    "$oid": "6746e972cd9f6eabed9231cd"
+  },
+  "nombre": "Ordenador HP Intel i3",
+  "categoria": "Ordenador",
+  "descripcion": "Es un ordenador sobremesa",
+  "precio_actual": 400,
+  "precio_original": 450,
+  "stock": 4,
+  "fecha": "2021-12-21",
+  "imagen": "OrdenadorHPInteli3.webp"
+},
+{
+  "_id": {
+    "$oid": "6746e986cd9f6eabed9231cf"
+  },
+  "nombre": "Ordenador HP Ryzen 5000",
+  "categoria": "Ordenador",
+  "descripcion": "Es un ordenador sobremesa",
+  "precio_actual": 800,
+  "precio_original": 850,
+  "stock": 1,
+  "fecha": "2020-09-11",
+  "imagen": "OrdenadorHPRyzen5000.jpg"
+},
+{
+  "_id": {
+    "$oid": "6746e993cd9f6eabed9231d1"
+  },
+  "nombre": "Ordenador HP Intel i5",
+  "categoria": "Ordenador",
+  "descripcion": "Es un ordenador sobremesa",
+  "precio_actual": 500,
+  "precio_original": 500,
+  "stock": 2,
+  "imagen": "OrdenadorHPInteli5.jpg"
+},
+{
+  "_id": {
+    "$oid": "6746e9a2cd9f6eabed9231d3"
+  },
+  "nombre": "Ordenador HP Ryzen 5500",
+  "categoria": "Ordenador",
+  "descripcion": "Es un ordenador sobremesa",
+  "precio_actual": 750,
+  "precio_original": 800,
+  "stock": 1,
+  "fecha": "2022-10-20",
+  "imagen": "OrdenadorHPRyzen5500.avif"
+},
+{
+  "_id": {
+    "$oid": "6746fafacd9f6eabed9231d8"
+  },
+  "nombre": "Auriculares Sony WH",
+  "categoria": "Auriculares",
+  "descripcion": "Auriculares inalámbricos",
+  "precio_actual": 50,
+  "precio_original": 80,
+  "stock": 4,
+  "fecha": "2022-01-13",
+  "imagen": "AuricularesSonyWH.avif"
+}]

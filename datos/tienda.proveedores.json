@@ -1,0 +1,75 @@
+[{
+  "_id": {
+    "$oid": "6746c97ecd9f6eabed9231ae"
+  },
+  "productos_id": [
+    {
+      "$oid": "6746c780cd9f6eabed923198"
+    },
+    {
+      "$oid": "6746c7b4cd9f6eabed92319a"
+    }
+  ],
+  "nombre": "Entregas S.L.",
+  "direccion": "Calle Tercia, nº 12",
+  "email": "entregasSL@gmail.com",
+  "telefono": 669183201,
+  "localidad": "Ciudad Real"
+},
+{
+  "_id": {
+    "$oid": "6749713a1784be5cf7e40ebc"
+  },
+  "productos_id": [
+    {
+      "$oid": "6746e82fcd9f6eabed9231c9"
+    },
+    {
+      "$oid": "6746e845cd9f6eabed9231cb"
+    },
+    {
+      "$oid": "6746e972cd9f6eabed9231cd"
+    }
+  ],
+  "nombre": "Entregas Seguras S.L.",
+  "direccion": "Calle Esquina, nº 2",
+  "email": "entregasSegurasSL@gmail.com",
+  "telefono": 619213049,
+  "localidad": "Valdepeñas"
+},
+{
+  "_id": {
+    "$oid": "674971c51784be5cf7e40ec0"
+  },
+  "productos_id": [
+    {
+      "$oid": "6746e986cd9f6eabed9231cf"
+    },
+    {
+      "$oid": "6746e993cd9f6eabed9231d1"
+    }
+  ],
+  "nombre": "Paquetes S.L.",
+  "direccion": "Calle Escobar, nº 3",
+  "email": "PaquetesBolaños@gmail.com",
+  "telefono": 678795245,
+  "localidad": "Bolaños"
+},
+{
+  "_id": {
+    "$oid": "6749723c1784be5cf7e40ec4"
+  },
+  "productos_id": [
+    {
+      "$oid": "6746e9a2cd9f6eabed9231d3"
+    },
+    {
+      "$oid": "6746fafacd9f6eabed9231d8"
+    }
+  ],
+  "nombre": "Tu Entrega S.L.",
+  "direccion": "Calle Machado, nº 5",
+  "email": "tuEngrega@gmail.com",
+  "telefono": 635746391,
+  "localidad": "Almagro"
+}]

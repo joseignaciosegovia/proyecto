@@ -1,0 +1,70 @@
+[{
+  "_id": {
+    "$oid": "673f1d733b6ebb8aef01108b"
+  },
+  "cliente_id": {
+    "$oid": "673f1d733b6ebb8aef01108a"
+  },
+  "usuario": "antL",
+  "contraseña": "$2y$10$XkxZGyiE4lnI8918egTRxefldOCmKkmmfXV5So13dFQV4hWZaYffa"
+},
+{
+  "_id": {
+    "$oid": "674432efe691df17d4020a69"
+  },
+  "cliente_id": {
+    "$oid": "674432efe691df17d4020a68"
+  },
+  "usuario": "rupLop",
+  "contraseña": "$2y$10$kJdntRkmg2BbEcqS3Qf7euTIdKPjR0TS2XMPariPeoGSeOzsTfOu6"
+},
+{
+  "_id": {
+    "$oid": "67498d3feeba664c5d091429"
+  },
+  "cliente_id": {
+    "$oid": "67498d3feeba664c5d091428"
+  },
+  "usuario": "ped23",
+  "contraseña": "$2y$10$ohcANI.Guy/kc4i4ouEf2.DNg5/piQW2/k.rQy8qtf2p60LgC1nTu"
+},
+{
+  "_id": {
+    "$oid": "674d6efdf2006a49400ea0ef"
+  },
+  "cliente_id": {
+    "$oid": "674d6efdf2006a49400ea0ee"
+  },
+  "usuario": "mar221",
+  "contraseña": "$2y$10$HvCLrt38ZDxw987sjxyUOOVr5hhsFab2czp5yLc5/aU5/RPGPVupW"
+},
+{
+  "_id": {
+    "$oid": "674da0b15341df5ac00e6c5d"
+  },
+  "cliente_id": {
+    "$oid": "674da0b15341df5ac00e6c5c"
+  },
+  "usuario": "mar67",
+  "contraseña": "$2y$10$mIzWJgxwmXXc6IxmjlL6t.W4yuSfiKMPKA7v34AwhEAU.VdQb0ipO"
+},
+{
+  "_id": {
+    "$oid": "6750150dec56f244890c89ce"
+  },
+  "cliente_id": {
+    "$oid": "6750150dec56f244890c89cd"
+  },
+  "usuario": "ass",
+  "contraseña": "$2y$10$bzTD687c2OvghdVLUh4QJ.TViIFWBqFDFb49egcdKSLkwoUKhXNpK"
+},
+{
+  "_id": {
+    "$oid": "675015b8ec56f244890c89d0"
+  },
+  "cliente_id": {
+    "$oid": "675015b8ec56f244890c89cf"
+  },
+  "usuario": "j",
+  "contraseña": "$2y$10$pw2v7LtMyEbJoc3vGc408u5D96u8iyYGLh0QyupLUjea3fFAe4iMe"
+}]

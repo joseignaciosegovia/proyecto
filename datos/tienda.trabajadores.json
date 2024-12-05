@@ -1,0 +1,32 @@
+[{
+  "_id": {
+    "$oid": "673c9b63dc4801c43d000033"
+  },
+  "nombre": "Antonio López",
+  "departamento": "Compras",
+  "fecha_contratacion": "01-04-2021"
+},
+{
+  "_id": {
+    "$oid": "673c9b63dc4801c43d000034"
+  },
+  "nombre": "Juan Garcia",
+  "departamento": "Análisis",
+  "fecha_contratacion": "03-10-2023"
+},
+{
+  "_id": {
+    "$oid": "673c9b63dc4801c43d000035"
+  },
+  "nombre": "María Fernández",
+  "departamento": "Gestión",
+  "fecha_contratacion": "13-05-2022"
+},
+{
+  "_id": {
+    "$oid": "673c9b63dc4801c43d000036"
+  },
+  "nombre": "Lucía Hernández",
+  "departamento": "Servicio Técnico",
+  "fecha_contratacion": "11-01-2021"
+}]
