@@ -49,6 +49,6 @@
             // Cargamos el pie
             require_once "vista/footer.php";
         ?>
-        <script src="js/main.js"></script>
+        <script type="module" src="js/main.js"></script>
     </body>
 </html>

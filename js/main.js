@@ -56,16 +56,16 @@ usuarioIcono.addEventListener("click", () => {
 
     // Comprobamos si hay un usuario logeado
 
-    fetch('public/devolverCliente.php', {
+    fetch('/Aplicacion/public/devolverCliente.php', {
         method: 'get'
       }).then ((response) => response.json()
       ).then(function (data) {
         if(data){
             seccionUsuario.replaceChildren();
-            seccionUsuario.insertAdjacentHTML('beforeend', `</br></br><a href="public/perfil.php">Perfil</a></br>
-                <a href="public/historialCompras.php">Historial de compras</a></br>
-                <a href="public/listaDeseos.php">Lista de deseos</a></br>
-                <a href="public/quejas.php">Quejas y sugerencias</a></br>
+            seccionUsuario.insertAdjacentHTML('beforeend', `</br></br><a href="/Aplicacion/public/perfil.php">Perfil</a></br>
+                <a href="/Aplicacion/public/historialCompras.php">Historial de compras</a></br>
+                <a href="/Aplicacion/public/listaDeseos.php">Lista de deseos</a></br>
+                <a href="/Aplicacion/public/quejas.php">Quejas y sugerencias</a></br>
                 <i class="bi bi-x-circle" id="cerrarUsuario"></i>
                 <button type="button" class="btn-salir">Cerrar sesión</button>`);
         }
@@ -214,7 +214,6 @@ function handle_cambiarCantidad(){
 }
 
 function handle_buyOrden() {
-
     // Si se intenta comprar antes de hacer un pedido
     if(productosCarrito.length <= 0){
         alert("No tiene ningún producto en la cesta");
@@ -240,7 +239,6 @@ function handle_buyOrden() {
 
     productosCarrito = [];
     update();
-    
 }
 
 // Pulsamos el botón 'Acceso a trabajadores'
@@ -263,11 +261,11 @@ function handle_registroClientes() {
 
 // Pulsamos el botón 'Cerrar sesión'
 function handle_cerrarClientes() {
-    fetch('public/cerrar.php', {
+    fetch('/Aplicacion/public/cerrar.php', {
         method: 'get'
       }).then((response) => response.text())
       .then(function(data) {
-        window.open("index.php", "_self");
+        window.open("/Aplicacion/index.php", "_self");
       }).catch(function(data) {
         console.log("Error");
       }

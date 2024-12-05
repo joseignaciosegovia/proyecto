@@ -1,17 +1,31 @@
-// Iconos
-let carrito = document.querySelector('.bi-cart-dash');
-let lupa = document.querySelector('.bi-search');
-let usuario = document.querySelector('.bi-person-circle');
-let cesta = document.getElementById('cesta');
-let seccionUsuario = document.getElementById('usuario');
-let cerrarCesta = document.querySelector('#cerrarCesta');
-let novedades = document.querySelector('#novedades');
-let ofertas = document.querySelector('#ofertas');
-let ordenadores = document.querySelector('#ordenadores');
-let componentes = document.querySelector('#componentes');
+import {
+    update,
+    manejadores,
+    botonComprar,
+    cestaBoxComponent,
+    handle_añadirCarrito,
+    handle_eliminarCesta,
+    handle_cerrarClientes,
+    handle_cambiarCantidad,
+    handle_buyOrden,
+    handle_trabajadores,
+    handle_clientes,
+    handle_registroClientes,
+    updateTotal
+} from './funciones.js';
 
+// Iconos
+/*const carritoIcono = document.querySelector('.bi-cart-dash');
+const cesta = document.getElementById('cesta');
+
+const lupaIcono = document.querySelector('.bi-search');
+const usuarioIcono = document.querySelector('.bi-person-circle');
+const seccionUsuario = document.getElementById('usuario');
+const cerrarCesta = document.querySelector('#cerrar-cesta');*/
+
+/*
 // Botón para comprar
-const buy_btn = document.querySelector(".btn-buy");
+const buy_btn = document.querySelector(".btn-comprar");
 buy_btn.addEventListener("click", handle_buyOrden);
 
 // Botón para el acceso de los trabajadores
@@ -26,15 +40,23 @@ btnClientes.addEventListener("click", handle_clientes);
 const btnRegistroClientes = document.querySelector(".btn-login");
 btnRegistroClientes.addEventListener("click", handle_registroClientes);
 
-let itemsAdded = [];
+let itemsAdded = [];*/
 
+// Botón para comprar
+/*const comprar_btn = document.querySelector(".btn-comprar");
+comprar_btn.addEventListener("click", handle_buyOrden);*/
+
+/*botonComprar();
+manejadores();*/
+
+/*
 // Pulsamos en el icono del carrito
-carrito.addEventListener("click", () => {
+carritoIcono.addEventListener("click", () => {
     cesta.style.display = "block";
 });
 
 // Pulsamos en el icono del usuario
-usuario.addEventListener("click", () => {
+usuarioIcono.addEventListener("click", () => {
 
     // Comprobamos si hay un usuario logeado
 
@@ -44,10 +66,10 @@ usuario.addEventListener("click", () => {
       ).then(function (data) {
         if(data){
             seccionUsuario.replaceChildren();
-            seccionUsuario.insertAdjacentHTML('beforeend', `</br></br><a href="perfil.php">Perfil</a></br>
-                <a href="historialCompras.php">Historial de compras</a></br>
-                <a href="listaDeseos.php">Lista de deseos</a></br>
-                <a href="quejas.php">Quejas y sugerencias</a></br>
+            seccionUsuario.insertAdjacentHTML('beforeend', `</br></br><a href="/Aplicacion/public/perfil.php">Perfil</a></br>
+                <a href="/Aplicacion/public/historialCompras.php">Historial de compras</a></br>
+                <a href="/Aplicacion/public/listaDeseos.php">Lista de deseos</a></br>
+                <a href="/Aplicacion/public/quejas.php">Quejas y sugerencias</a></br>
                 <i class="bi bi-x-circle" id="cerrarUsuario"></i>
                 <button type="button" class="btn-salir">Cerrar sesión</button>`);
         }
@@ -71,43 +93,47 @@ cerrarCesta.addEventListener("click", () => {
 // Pulsamos el botón de cerrar en el menú del usuario
 seccionUsuario.addEventListener("click", () => {
     seccionUsuario.style.display = "none";
-});
+});*/
 
 window.addEventListener('load', function() {
+    botonComprar();
+    manejadores();
+    const seccionUsuario = document.getElementById('usuario');
     cesta.style.display = "none";
     seccionUsuario.style.display = "none";
-    addEvents();
+    eventos();
 });
-
+/*
 function update() {
-    addEvents();
+    eventos();
     updateTotal();
-}
+}*/
 
-function addEvents() {
+function eventos() {
 
     // Botón para eliminar artículos del carrito
-    let cartRemove_btns = document.querySelectorAll(".cart-remove");
+    let eliminarCesta_btns = document.querySelectorAll(".eliminar-cesta");
 
-    cartRemove_btns.forEach((btn) => {
+    eliminarCesta_btns.forEach((btn) => {
         btn.addEventListener("click", handle_eliminarCesta);
     });
 
     // Botón para cambiar la cantidad de artículos del carrito
-    let cartQuantity_inputs = document.querySelectorAll(".cart-quantity");
+    let cantidadCesta_inputs = document.querySelectorAll(".cantidad-cesta");
 
-    cartQuantity_inputs.forEach((input) => {
+    cantidadCesta_inputs.forEach((input) => {
         input.addEventListener("change", handle_cambiarCantidad);
     });
 
     // Botón para añadir artículos al carrito
-    let addCart_btns = document.querySelectorAll(".add-cart");
+    let añadirCarrito = document.querySelectorAll(".add-cart");
 
-    addCart_btns.forEach((btn) => {
-        btn.addEventListener("click", handle_añadirCarrito);
+    añadirCarrito.forEach((boton) => {
+        boton.addEventListener("click", handle_añadirCarrito);
     });
 }
 
+/*
 function handle_añadirCarrito() {
     let product = this.parentElement;
     console.log(product);
@@ -144,20 +170,20 @@ function handle_añadirCarrito() {
     cart.classList.add("active");
 
     update()
-};
-
+};*/
+/*
 function handle_eliminarCesta() {
     this.parentElement.remove();
 
     itemsAdded = itemsAdded.filter(
-        (el) => el.title !== this.parentElement.querySelector(".cart-product-title").innerHTML
+        (el) => el.title !== this.parentElement.querySelector(".nombre-producto-cesta").innerHTML
     );    
     update();
-}
-
+}*/
+/*
 // Pulsamos el botón 'Cerrar sesión'
 function handle_cerrarClientes() {
-    fetch('../public/cerrar.php', {
+    fetch('/Aplicacion/public/cerrar.php', {
         method: 'get'
       }).then((response) => response.text())
       .then(function(data) {
@@ -166,9 +192,8 @@ function handle_cerrarClientes() {
         console.log("Error");
       }
     );
-}
-
-function handle_changeItemQuantity(){
+}*/
+/*function handle_cambiarCantidad(){
     if(isNaN(this.value) || this.value < 1){
         this.value = 1;
     }
@@ -177,25 +202,38 @@ function handle_changeItemQuantity(){
     this.value = Math.floor(this.value); 
 
     update();
-}
+}*/
 
-function handle_buyOrden() {
+/*function handle_buyOrden() {
 
-    invocarNode();
-
-    // Si se intenta comprar hacer de hacer un pedido
-    if(itemsAdded.length <= 0){
+    // Si se intenta comprar antes de hacer un pedido
+    if(productosCarrito.length <= 0){
         alert("No tiene ningún producto en la cesta");
         return;
     }
-    const cartContent = cart.querySelector(".cart-content");
-    cartContent.innerHTML = "";
+    const contenidoCesta = cesta.querySelector(".contenido-cesta");
+    contenidoCesta.innerHTML = "";
     alert("Su pedido se realizó exitosamente")
-    itemsAdded = [];
+
+    const formData = new FormData();
+    formData.append("productos", JSON.stringify(productosCarrito));
+
+    fetch('public/comprar.php', {
+        method: 'post',
+        body: formData
+      }).then((response) => response.text())
+      .then(function(data) {
+
+      }).catch(function(data) {
+        console.log("Error");
+      }
+    );
+
+    productosCarrito = [];
     update();
     
-}
-
+}*/
+/*
 // Pulsamos el botón 'Acceso a trabajadores'
 function handle_trabajadores() {
     // Abrimos una pestaña con el acceso a los trabajadores
@@ -212,38 +250,38 @@ function handle_clientes() {
 function handle_registroClientes() {
     // Abrimos en la misma pestaña el registro de los clientes
     window.open("public/registroCliente.php", "_self");
-}
-
+}*/
+/*
 // Actualizar y renderizar
 function updateTotal() {
-    let cartBoxes = document.querySelectorAll('.cart-box');
-    const totalElement = cart.querySelector(".total-price");
+    let cestaBoxes = document.querySelectorAll('.cesta-box');
+    const totalElement = cesta.querySelector(".precio-total");
     let total=0;
 
-    cartBoxes.forEach((cartBox) => {
-        let priceElement  = cartBox.querySelector(".cart-price");
-        let price = parseFloat(priceElement.innerHTML.replace("$", ""));
-        let quantity = cartBox.querySelector(".cart-quantity").value;
+    cestaBoxes.forEach((cestaBox) => {
+        let precioElemento  = cestaBox.querySelector(".precio-cesta");
+        let precio = parseFloat(precioElemento.innerHTML.replace("€", ""));
+        let cantidad = cestaBox.querySelector(".cantidad-cesta").value;
 
-        total += price * quantity;
+        total += precio * cantidad;
     });
 
     total = total.toFixed(2);
 
-    totalElement.innerHTML = "$" + total;
-}
-
-function cestaBoxComponent(title, price, imgSrc) {
+    totalElement.innerHTML = total + "€";
+}*/
+/*
+function cestaBoxComponent(nombre, precio, rutaImagen) {
     return `
-    <div class="cart-box">
-        <img src="${imgSrc}" alt="" class="cart-img">
+    <div class="cesta-box">
+        <img src="${rutaImagen}" alt="" class="imagen-cesta">
         <div class="detail-box">
-        <div class="cart-product-title">${title}</div>
-        <div class="cart-price">$${price}</div>
-        <input type="number" value="1" class="cart-quantity">
+        <div class="nombre-producto-cesta">${nombre}</div>
+        <div class="precio-cesta">$${precio}</div>
+        <input type="number" value="1" class="cantidad-cesta">
     </div>
 
     <!-- ELIMINAR CART -->
-    <i class="bx bxs-trash-alt cart-remove"></i>
+    <i class="bx bxs-trash-alt eliminar-cesta"></i>
     `;
-}
+}*/
