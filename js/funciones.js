@@ -267,11 +267,11 @@ function handle_añadirDeseos() {
 
     const formData = new FormData();
 
-    const producto = [this.parentNode.querySelector('a').innerText, this.parentNode.querySelectorAll('p')[1].innerText];
+    const datos = ["añadir", this.parentNode.querySelector('a').innerText, this.parentNode.querySelectorAll('p')[1].innerText];
 
-    formData.append("producto", JSON.stringify(producto));
+    formData.append("datos", JSON.stringify(datos));
 
-    fetch('servidor/deseos.php', {
+    fetch('servidor/actualizarListaDeseos.php', {
         method: 'post',
         body: formData
       }).then((response) => response.text())

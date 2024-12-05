@@ -193,7 +193,7 @@ function handle_añadirDeseos() {
 
     formData.append("producto", JSON.stringify(producto));
 
-    fetch('servidor/deseos.php', {
+    fetch('servidor/actualizarListaDeseos.php', {
         method: 'post',
         body: formData
       }).then((response) => response.text())

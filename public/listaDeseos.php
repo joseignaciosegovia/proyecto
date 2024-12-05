@@ -2,6 +2,7 @@
     session_start();
 
     require_once "../controlador/Crud.php";
+    
 
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
@@ -20,11 +21,21 @@
     // Cargamos la cabecera
     require_once "../vista/header.php";
 
+    // Si pulsamos el botón actualizar
     if(isset($_POST['Actualizar'])){
-        foreach($_POST as $clave => $valor) {
-            if($clave != "Actualizar" && $clave != "Productos"){
-
-            }
+        // Si hemos seleccionado algún producto
+        if(isset($_POST['productos'])){
+            $datos = ["eliminar", $_POST['productos']];
+            $datos2 = json_encode($datos);
+            header("Location: ../servidor/actualizarListaDeseos.php?datos=$datos2");
+            /*foreach($_POST['productos'] as $producto) {
+                $accion = ["eliminar", $producto];
+                $accion2 = json_encode($accion);
+                header("Location: ../servidor/actualizarListaDeseos.php?datos=$accion2");
+            }*/
+        }
+        else {
+            echo "</br>Debes seleccionar algun alumno (mediante su checkbox)";
         }
         
     }
